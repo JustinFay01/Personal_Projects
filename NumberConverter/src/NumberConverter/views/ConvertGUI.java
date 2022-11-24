@@ -42,7 +42,7 @@ public class ConvertGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void runWindow() {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -62,8 +62,6 @@ public class ConvertGUI {
 		initialize();
 		createEvents();
 		con = new Converter();
-		
-		
 	}
 
 	/**
@@ -101,7 +99,9 @@ public class ConvertGUI {
 		
 		
 		
-		
+		/*
+		 * Windows Builder Code
+		 */
 		JLabel valueLabel = new JLabel("Value:");
 		
 		convertButton = new JButton("= Convert");
@@ -163,7 +163,7 @@ public class ConvertGUI {
 		frmNumberConverter.getContentPane().setLayout(groupLayout);
 	}
 	
-	//Method contains all of the code for creating events 
+	//Handles the actual conversion and creates action event based off of convert
 	private void createEvents() {
 		
 		convertButton.addActionListener(new ActionListener() {
@@ -224,14 +224,12 @@ public class ConvertGUI {
 					}
 				}
 			}
-				
 				catch (NumberFormatException error) {
 					valueDisplay.setText("Oh No! Number Format Exception!");
 				}
 				
 				
 			}
-			
 			
 		});
 		}
