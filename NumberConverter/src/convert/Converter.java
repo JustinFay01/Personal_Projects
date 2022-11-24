@@ -11,13 +11,22 @@ public class Converter {
 		}	
 	}
 	
+	public String arrayToString(ArrayList<String> converted) {
+		String str = "";
+		for(int i = converted.size()-1; i >= 0; i--) {
+			str = str + converted.get(i);
+		}	
+		
+		return str;
+	}
+	
 	/*
 	 * Takes binary string and turns it into an integer 
 	 */
 	public long btoD(String bin) {
 		long n = 0;
 		String input[] = bin.split("");
-		for(int i = 2; i < input.length; i++) {
+		for(int i = 0; i < input.length; i++) {
 			long value = Integer.valueOf(input[i]);
 			if(value == 1 || value == 0){
 				n = n * 2 + value;
@@ -34,7 +43,7 @@ public class Converter {
 		public long otoD(String oct) {
 			long n = 0;
 			String input[] = oct.split("");
-			for(int i = 1; i < input.length; i++) {
+			for(int i = 0; i < input.length; i++) {
 				long value = Integer.valueOf(input[i]);
 				if(value >= 0 && value <= 7){
 					n = n * 8 + value;
@@ -51,11 +60,11 @@ public class Converter {
 		public long htoD(String hex) {
 			long n = 0;
 			String input[] = hex.split("");
-			for(int i = 2; i < input.length; i++) {
+			for(int i = 0; i < input.length; i++) {
 				input[i] = input[i].toUpperCase();
 			}
 			
-			for(int i = 2; i < input.length; i++) {
+			for(int i = 0; i < input.length; i++) {
 				try {
 					long value = Integer.valueOf(input[i]);
 					if(value >= 0 && value <= 9)
