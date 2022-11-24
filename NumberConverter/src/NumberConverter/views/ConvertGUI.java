@@ -28,6 +28,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.UIManager;
 
 public class ConvertGUI {
 
@@ -38,6 +41,7 @@ public class ConvertGUI {
 	private Converter con;
 	private JTextField toBeConverted;
 	private JTextArea valueDisplay;
+	private JButton btmSwap;
 
 	/**
 	 * Launch the application.
@@ -86,6 +90,7 @@ public class ConvertGUI {
 		JLabel lblNewLabel_1 = new JLabel("Enter number to be converted:");
 		
 		toBeConverted = new JTextField();
+		toBeConverted.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		toBeConverted.setColumns(10);
 		
 		
@@ -112,7 +117,15 @@ public class ConvertGUI {
 		convertButton.setForeground(new Color(255, 255, 255));
 		
 		valueDisplay = new JTextArea();
+		valueDisplay.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		valueDisplay.setVerifyInputWhenFocusTarget(false);
+		valueDisplay.setTabSize(75);
+		valueDisplay.setLineWrap(true);
 		valueDisplay.setEditable(false);
+		valueDisplay.setOpaque(true);
+		
+		btmSwap = new JButton("Swap");
+		
 		GroupLayout groupLayout = new GroupLayout(frmNumberConverter.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -120,21 +133,23 @@ public class ConvertGUI {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(valueDisplay, Alignment.LEADING)
-						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(toBeConverted)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(fromLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-									.addComponent(fromCombo, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
-								.addGap(46)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(toLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-										.addGap(109))
-									.addComponent(toCombo, 0, 186, Short.MAX_VALUE)))
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
+						.addComponent(toBeConverted, Alignment.LEADING)
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(fromLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+								.addComponent(fromCombo, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
+							.addGap(46)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(toLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+									.addGap(109))
+								.addComponent(toCombo, 0, 186, Short.MAX_VALUE)))
+						.addComponent(lblNewLabel_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
 						.addComponent(valueLabel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-						.addComponent(convertButton, Alignment.LEADING))
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addComponent(convertButton)
+							.addGap(18)
+							.addComponent(btmSwap, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -154,10 +169,12 @@ public class ConvertGUI {
 					.addComponent(toBeConverted, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(valueLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(valueDisplay, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(convertButton)
+					.addGap(1)
+					.addComponent(valueDisplay, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(convertButton)
+						.addComponent(btmSwap, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(23, Short.MAX_VALUE))
 		);
 		frmNumberConverter.getContentPane().setLayout(groupLayout);
@@ -194,12 +211,14 @@ public class ConvertGUI {
 					converted = con.htoD(toConvert);
 					break;
 				}
-				//conversion Error
+				
 				
 				
 				//Print in value box
 				String to = (String)toCombo.getSelectedItem();
-				ArrayList<String> finalCon = new ArrayList();
+				ArrayList<String> finalCon = new ArrayList<>();
+				
+				//conversion Error
 				if(converted == -1)	{
 					valueDisplay.setText("Invalid Number");
 				}
@@ -228,9 +247,21 @@ public class ConvertGUI {
 					valueDisplay.setText("Oh No! Number Format Exception!");
 				}
 				
-				
 			}
 			
+		});
+		
+		btmSwap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Swap Combo Boxes
+				String tmp = (String)toCombo.getSelectedItem();
+				toCombo.setSelectedItem((String)fromCombo.getSelectedItem());
+				fromCombo.setSelectedItem(tmp);
+				
+				//clear text
+				valueDisplay.setText("");
+				toBeConverted.setText("");
+			}
 		});
 		}
 }
