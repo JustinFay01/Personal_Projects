@@ -6,15 +6,15 @@
 
 using namespace std;
 
+void click(){
+     mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+}
 void lockin()
 {
     SetCursorPos(1292, 1054);
     click();
 }
 
-void click(){
-     mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-}
 /**
 Character Cordinates for Main Monitor
 Estimate
