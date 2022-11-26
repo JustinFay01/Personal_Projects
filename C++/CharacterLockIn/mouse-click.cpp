@@ -48,7 +48,7 @@ int main()
     HWND hWnd{0};
 
     printf("Welcome to instant character select\nPress Q to quit, C to print current mouse cordinates or hold the corresponding number for the character you want:\n");
-    printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n4 -> Chamber..\n");
+    printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n4 -> Chamber..\n5-> Reyna on alt..\n");
 
     int running = 1;
     while (running == 1)
@@ -83,6 +83,13 @@ int main()
         {
             printf("Locking in Chamber...\n");
             SetCursorPos(1114, 1237);
+            click();
+            lockin();
+        }
+        else if (GetKeyState('5') & 0x8000)
+        {
+            printf("Locking in Reyna on Alt...\n");
+            SetCursorPos(1220, 1213);
             click();
             lockin();
         }
