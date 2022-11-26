@@ -18,7 +18,7 @@ int main()
     // sets display to be used
     HWND hWnd{0};
 
-    printf("Welcome to instant character select\nPress Q to quit or the corresponding number for the character you want:\n");
+    printf("Welcome to instant character select\nPress Q to quit or hold the corresponding number for the character you want:\n");
     printf("1 -> Champ 1..\n2 -> Champ 2..\n");
 
     int running = 1;
