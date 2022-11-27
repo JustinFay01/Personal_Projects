@@ -48,7 +48,7 @@ int main()
     POINT p;
     // sets display to be used
     HWND hWnd{0};
-
+    int s = 20; //20 milliseconds
     printf("Welcome to instant character select\nPress Q to quit, C to print current mouse cordinates or hold the corresponding number for the character you want:\n");
     printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n4 -> Chamber..\n5-> Reyna on alt..\n");
 
@@ -64,7 +64,7 @@ int main()
             // set and click
             SetCursorPos(1118, 1341);
             click();
-            Sleep(10);
+            Sleep(s);
             lockin();
         }
         else if (GetKeyState('2') & 0x8000)
@@ -72,7 +72,7 @@ int main()
             printf("Locking in KillyJoy...\n");
             SetCursorPos(1683,1237);
             click();
-            Sleep(10);
+            Sleep(s);
             lockin();
         }
         else if (GetKeyState('3') & 0x8000)
@@ -80,7 +80,7 @@ int main()
             printf("Locking in Jett...\n");
             SetCursorPos(1453, 1239);
             click();
-            Sleep(10);
+            Sleep(s);
             lockin();
         }
         else if (GetKeyState('4') & 0x8000)
@@ -88,7 +88,7 @@ int main()
             printf("Locking in Chamber...\n");
             SetCursorPos(1114, 1237);
             click();
-            Sleep(10);
+            Sleep(s);
             lockin();
         }
         else if (GetKeyState('5') & 0x8000)
@@ -96,13 +96,13 @@ int main()
             printf("Locking in Reyna on Alt...\n");
             SetCursorPos(1220, 1213);
             click();
-            Sleep(10);
+            Sleep(s);
             lockin();
         }
         else if (GetKeyState('C') & 0x8000)
         {
             GetCursorPos(&p);
-            Sleep(10);
+            Sleep(s);
             cout << "x = " << p.x << "y = " << p.y << endl;
         }
         // Used as quit command
