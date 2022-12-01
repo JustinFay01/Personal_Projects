@@ -1,5 +1,6 @@
 package examples;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -48,13 +49,89 @@ public class FriendRequest {
 		return result;
 	}
 	
+	public boolean[] adjRun() throws FileNotFoundException{
+		int[][] restrictions = readInput(fileRestriction);
+		int[][] requests = readInput(fileRequest);
+		
+		boolean[] result = makeRequestAdjacencyList(people, restrictions, requests);
+		
+		return result;
+	}
+	
 	/*
 	 * Print results
 	 */
 	public void printBoolean(boolean[] bool) {
-		  System.out.println(Arrays.toString(bool));  
+		int newLine = 0;
+		System.out.print("[");
+		  for(int i = 0; i < bool.length - 1; i++) {
+			  if(bool[i])
+				  System.out.print("true, ");
+			  else
+				  System.out.print("false, ");
+			  if(newLine > 15) {
+				  System.out.println();
+				  newLine = 0;
+			  }
+			newLine++;
+		  }
+		  if(bool[bool.length-1])
+			  System.out.print("true");
+		  else
+			  System.out.print("false");
+		  System.out.print("]");
+		  System.out.println();
 	}
-
+	
+	
+	public boolean[] makeRequestAdjacencyList(int n, int[][] restrictions, int[][] requests) {
+		HashMap<Integer, ArrayList<Integer>> adjList = new HashMap<>();
+		boolean[] result = new boolean[requests.length];
+			//created hashmap
+			for(int i = 0; i < n; i++) {
+				ArrayList<Integer> value = new ArrayList<>();
+				adjList.put(i, value);
+			}
+			
+			//set up symmetrical restrictions
+			for(int i = 0; i < restrictions.length; i++) {
+				ArrayList<Integer> value = adjList.get(restrictions[i][0]);
+				value.add(restrictions[i][1]);
+				
+				ArrayList<Integer> counter = adjList.get(restrictions[i][1]);
+				value.add(restrictions[i][0]);
+			}
+			
+			int count = 0;
+			//Check if friend can be added by checking both lists
+			for(int i = 0; i < requests.length; i++) {
+				int from = requests[i][0];
+				int to = requests[i][1];
+				
+				if(!adjList.get(from).contains(to) && !adjList.get(to).contains(from)) {
+					 result[count++] = true;
+					 
+					 //from can no longer to
+					 adjList.get(from).add(to);
+					 //to can no longer add from
+					 adjList.get(to).add(from);
+					 
+					 //change lists to be the same now
+					 for(int j = 0; j < adjList.get(from).size(); j++) {
+						 adjList.get(to).add( adjList.get(from).get(j));
+					 }
+					 for(int k = 0; k < adjList.get(to).size(); k++) {
+						 adjList.get(from).add(adjList.get(to).get(k));
+					 }
+					 
+				}
+				else {
+					result[count++] = false;
+				}
+			}
+			
+			return result;
+	}
 
 		//How to get method using lambda
 	
@@ -68,15 +145,6 @@ public class FriendRequest {
 	        //check restriction matrix to see if they can be accepted
 	        int[][] restrictionMatrix = new int[n][n];
 	        
-	        //Initalize and make it so you cant add yourself
-	        for(int i = 0; i < restrictionMatrix.length; i++){
-	            for(int j = 0; j < restrictionMatrix[0].length; j++){
-	                if(j == i)
-	                    restrictionMatrix[i][j] = 2;
-	                else    
-	                    restrictionMatrix[i][j] = 0;
-	            }
-	        }
 
 	        //Fill restrictions
 	        for(int i = 0; i < restrictions.length; i++){
