@@ -11,15 +11,12 @@ public class Example {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		File f = new File("C:\\Users\\justi\\git\\personal_projects\\GoodExamples\\src\\requests.txt");
-		
-		if(f.exists()) {
+
+		if (f.exists()) {
 			System.out.println("exists");
-		}
-		else
+		} else
 			System.out.println("does not");
-		
-		
-		
+
 //		  try {
 //		      File myObj = new File("filename.txt");
 //		      if (myObj.createNewFile()) {
@@ -33,10 +30,32 @@ public class Example {
 //		      System.out.println("An error occurred.");
 //		      e.printStackTrace();
 //		    }
-	
 		
+		if(halvesAreAlike("book"))
+			System.out.println("true");
+
 	}
 
+	// If to haves of a string have the same amount of vowels
+	// Uses binary search to look for values based on ASCII values
+	//
+	public static boolean halvesAreAlike(String s) {
+		int[] vowel = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+		int count1 = 0, count2 = 0;
+		for (int i = 0; i < s.length() / 2; i++) {
+			for (int j = 0; j < vowel.length; j++)
+				if (s.charAt(i) == vowel[j])
+					count1++;
+		}
+		for (int i = s.length() / 2; i < s.length(); i++) {
+			for (int j = 0; j < vowel.length; j++)
+				if (s.charAt(i) == vowel[j])
+					count2++;
+		}
+		return count1 == count2;
+	}
+
+	
 
 //Largest element in array quickly (binary search style)
 	public static int largest(int s[], int l, int r) {
@@ -141,7 +160,6 @@ public class Example {
 		return ans;
 	}
 
-	
 	/*
 	 * Reverse words and use trim statement to delete extra white space
 	 */
@@ -162,6 +180,5 @@ public class Example {
 		s = String.join(" ", str);
 		return s;
 	}
-	
-	
+
 }
