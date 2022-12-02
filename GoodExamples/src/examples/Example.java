@@ -32,7 +32,7 @@ public class Example {
 //		    }
 		
 		if(halvesAreAlike("book"))
-			System.out.println("tru");
+			System.out.println("now");
 
 	}
 
