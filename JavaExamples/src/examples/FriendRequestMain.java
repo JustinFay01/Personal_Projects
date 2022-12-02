@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class exampleMain {
+public class FriendRequestMain {
 
     static List<String> lines = new ArrayList<String>();
     static String line = null;
