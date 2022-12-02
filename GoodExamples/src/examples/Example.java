@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Example {
 
@@ -31,16 +34,45 @@ public class Example {
 //		      e.printStackTrace();
 //		    }
 		
-		if(halvesAreAlike("textbook"))
-			System.out.println("True");
-		
-		
-		int[] vowel = { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'};
-		if(binarySearch(vowel, 'E', 0, vowel.length-1))
-			System.out.println("Found");
-		else
-			System.out.println("Not found");
 	}
+	
+	
+	//My Presorting 2 sum
+	 public int[] twoSum(int[] nums, int target) {
+
+	     Arrays.sort(nums);
+
+	     int[] solutions = new int[2];
+
+	    for(int i = 0; i < nums.length; i++){
+	        solutions[1] = Arrays.binarySearch(nums, Math.abs(nums[i] - target));
+	        if(solutions[1] >= 0 && solutions[1] != i){
+	            solutions[0] = i;
+	            System.out.println(solutions[0] +" "+ solutions[1]);
+	            return solutions;
+	        }
+	    }
+	    return solutions;
+	    }
+	
+	 
+	//Fastest 2 sum while still returning the original indices
+	public int[] twoSumMap(int[] nums, int target) {
+	  Map<Integer, Integer> map = new HashMap();
+      int[] result = new int[2];
+      int num = 0;
+      for(int i = 0; i < nums.length; i++) {
+          num = nums[i];
+          if(map.containsKey(target - num)) {
+              result[0] = map.get(target - num);
+              result[1] = i;
+              return result;
+          } else {
+              map.put(num, i);
+          }
+      }
+      return result;
+  }
 	
 	//Haves are alike using binary search
 	public static boolean halvesBinary(String s) {
@@ -58,39 +90,30 @@ public class Example {
 		}
 		return (count1 == count2);
 	}
-	
-		public static boolean binarySearch(int[] toSearch, int searching, int l, int r) {
-			int mid = (l+r)/2;
-			if(searching == toSearch[mid])
-				return true;
-			else if(searching < toSearch[mid])
-				return binarySearch(toSearch, searching,l, mid-1);
-			else if(searching > toSearch[mid])
-				return binarySearch(toSearch, searching, mid+1, r);
-			else
-				return false;
-		}
 		
 
-	// If to haves of a string have the same amount of vowels
-	// Uses binary search to look for values based on ASCII values
-	//
-	public static boolean halvesAreAlike(String s) {
-		int[] vowel = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
-		int count1 = 0, count2 = 0;
-		for (int i = 0; i < s.length() / 2; i++) {
-			for (int j = 0; j < vowel.length; j++)
-				if (s.charAt(i) == vowel[j])
-					count1++;
-		}
-		for (int i = s.length() / 2; i < s.length(); i++) {
-			for (int j = 0; j < vowel.length; j++)
-				if (s.charAt(i) == vowel[j])
-					count2++;
-		}
-		return count1 == count2;
-	}
-
+		//Using sets and going forwards and backwards at same time
+		 public boolean halvesAreAlike(String s) {
+		       int start=0;
+		       int end=0;
+		       Set<Character>set = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');  
+		        int i=0;
+		        int j=s.length()-1;
+		        while(i<j){
+		            if(set.contains(s.charAt(i))){
+		                start++;
+		            }
+		              if(set.contains(s.charAt(j))){
+		                end++;
+		            }
+		            i++;
+		            j--;
+		        }
+		        if(start==end){
+		            return true;
+		        }
+		        return false;
+		    }
 	
 
 //Largest element in array quickly (binary search style)
@@ -215,6 +238,18 @@ public class Example {
 
 		s = String.join(" ", str);
 		return s;
+	}
+	
+	public static boolean binarySearch(int[] toSearch, int searching, int l, int r) {
+		int mid = (l+r)/2;
+		if(searching == toSearch[mid])
+			return true;
+		else if(searching < toSearch[mid])
+			return binarySearch(toSearch, searching,l, mid-1);
+		else if(searching > toSearch[mid])
+			return binarySearch(toSearch, searching, mid+1, r);
+		else
+			return false;
 	}
 
 }
