@@ -31,10 +31,46 @@ public class Example {
 //		      e.printStackTrace();
 //		    }
 		
-		if(halvesAreAlike("book"))
-			System.out.println("now");
-
+		if(halvesAreAlike("textbook"))
+			System.out.println("True");
+		
+		
+		int[] vowel = { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'};
+		if(binarySearch(vowel, 'E', 0, vowel.length-1))
+			System.out.println("Found");
+		else
+			System.out.println("Not found");
 	}
+	
+	//Haves are alike using binary search
+	public static boolean halvesBinary(String s) {
+		int[] vowel = { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u'};
+		int count1 = 0, count2 = 0;
+		char[] str = s.toCharArray();
+		for(int i = 0; i < str.length; i++) {
+			if(i < str.length/2){
+				if(binarySearch(vowel, str[i], 0, vowel.length-1)) {
+					count1++;
+				}		
+			}
+			else if(binarySearch(vowel, str[i], 0, vowel.length-1))
+				count2++;
+		}
+		return (count1 == count2);
+	}
+	
+		public static boolean binarySearch(int[] toSearch, int searching, int l, int r) {
+			int mid = (l+r)/2;
+			if(searching == toSearch[mid])
+				return true;
+			else if(searching < toSearch[mid])
+				return binarySearch(toSearch, searching,l, mid-1);
+			else if(searching > toSearch[mid])
+				return binarySearch(toSearch, searching, mid+1, r);
+			else
+				return false;
+		}
+		
 
 	// If to haves of a string have the same amount of vowels
 	// Uses binary search to look for values based on ASCII values
