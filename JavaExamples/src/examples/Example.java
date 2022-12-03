@@ -1,57 +1,39 @@
 package examples;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 public class Example {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		File f = new File("C:\\Users\\justi\\git\\personal_projects\\GoodExamples\\src\\requests.txt");
-
-		if (f.exists()) {
-			System.out.println("exists");
-		} else
-			System.out.println("does not");
-
-//		  try {
-//		      File myObj = new File("filename.txt");
-//		      if (myObj.createNewFile()) {
-//		    	 System.out.println(myObj.getAbsolutePath());
-//		        System.out.println("File created: " + myObj.getName());
-//		      } else {
-//		    	  System.out.println(myObj.getAbsolutePath());
-//		        System.out.println("File already exists.");
-//		      }
-//		    } catch (IOException e) {
-//		      System.out.println("An error occurred.");
-//		      e.printStackTrace();
-//		    }
+	
+	
 		
 	}
 	
-	public int[][] transitiveClosure(int[][] restrictionMatrix){
-		int[][] r = restrictionMatrix;
-		
-		for(int row = 0; row < r.length; row++) {
-			for(int col = 0; col < r[0].length; col++) {
-				if(r[col][row] == 1) {
-					for(int k = 0; k < r.length; k++) {
-						if(r[col][row] == 1 && r[row][k] == 1)
-							r[col][k] = 1;
-					}
-				}	
-			}
-		}
-		return r;
-		
-	}
+	//Computing pivotIndex for Equilibrium Value
+	   public int pivotIndex(int[] nums) {
+	        int n = nums.length;
+	        int left[] = new int[n];
+	        //Compute all values of left 
+	        for(int i = 1; i<n;i++){
+	            left[i] = nums[i-1]+left[i-1];
+	        }
+	        //compute all possible values of right
+	        int right[] = new int[n];
+	        for(int i = n-2; i >= 0; i--){
+	            right[i] = nums[i+1]+right[i+1];
+	        } 
+	        nums = null;
+	        //compare until they are equal or not
+	        for(int i = 0;i<n;i++){
+	            if(left[i]==right[i])
+	                return i;
+	        }
+	        return -1;
+	    }
 	
 	public void displayTC(int V, int[][] tc)
     {
