@@ -1,40 +1,60 @@
 package examples;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 public class Example {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		File f = new File("C:\\Users\\justi\\git\\personal_projects\\GoodExamples\\src\\requests.txt");
-
-		if (f.exists()) {
-			System.out.println("exists");
-		} else
-			System.out.println("does not");
-
-//		  try {
-//		      File myObj = new File("filename.txt");
-//		      if (myObj.createNewFile()) {
-//		    	 System.out.println(myObj.getAbsolutePath());
-//		        System.out.println("File created: " + myObj.getName());
-//		      } else {
-//		    	  System.out.println(myObj.getAbsolutePath());
-//		        System.out.println("File already exists.");
-//		      }
-//		    } catch (IOException e) {
-//		      System.out.println("An error occurred.");
-//		      e.printStackTrace();
-//		    }
+	
+	
 		
 	}
+	
+	//Computing pivotIndex for Equilibrium Value
+	   public int pivotIndex(int[] nums) {
+	        int n = nums.length;
+	        int left[] = new int[n];
+	        //Compute all values of left 
+	        for(int i = 1; i<n;i++){
+	            left[i] = nums[i-1]+left[i-1];
+	        }
+	        //compute all possible values of right
+	        int right[] = new int[n];
+	        for(int i = n-2; i >= 0; i--){
+	            right[i] = nums[i+1]+right[i+1];
+	        } 
+	        nums = null;
+	        //compare until they are equal or not
+	        for(int i = 0;i<n;i++){
+	            if(left[i]==right[i])
+	                return i;
+	        }
+	        return -1;
+	    }
+	
+	public void displayTC(int V, int[][] tc)
+    {
+        System.out.println("\nTransitive closure :\n");
+        System.out.print(" ");
+        for (int v = 0; v < V; v++)
+           System.out.print("   " + v );
+        System.out.println();
+        for (int v = 0; v < V; v++) 
+        {
+            System.out.print(v +" ");
+            for (int w = 0; w < V; w++) 
+            {
+                if (tc[v][w] == 1) 
+                    System.out.print("  * ");
+                else                  
+                    System.out.print("    ");
+            }
+            System.out.println();
+        }
+    }
 	
 	
 	//My Presorting 2 sum

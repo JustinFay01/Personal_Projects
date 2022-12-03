@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import examples.FriendRequest;
+import examples.FriendRequest.FriendRequest;
 
 
 class friendRequestTest {
@@ -16,8 +16,8 @@ class friendRequestTest {
 	@Test
 	void case1() {
 	
-		String case1res = "case1res.txt";
-		String case1req = "case1req.txt";
+		String case1res = "C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case1res.txt";
+		String case1req = "C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case1req.txt";
 		
 		FriendRequest fb = new FriendRequest(3, case1res, case1req);
 
@@ -30,9 +30,9 @@ class friendRequestTest {
 		System.out.println("Results: ");
 		
 		try {
-			boolean[] result = fb.adjRun();
+			boolean[] result = fb.run();
 			fb.printBoolean(result);
-			boolean[] answers = answerArray("case1Answers.txt",result.length);
+			boolean[] answers = answerArray("C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case1Answers.txt",result.length);
 			
 			assertArrayEquals(result,answers);
 			
@@ -49,8 +49,8 @@ class friendRequestTest {
 	
 	@Test
 	void case2() {
-		String case2res = "case2res.txt";
-		String case2req = "case2req.txt";
+		String case2res = "C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case2res.txt";
+		String case2req = "C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case2req.txt";
 		
 		FriendRequest fb = new FriendRequest(5, case2res, case2req);
 		
@@ -67,7 +67,7 @@ class friendRequestTest {
 			boolean[] result = fb.run();
 			fb.printBoolean(result);
 			
-			boolean[] answers = answerArray("case2Answers.txt",result.length);
+			boolean[] answers = answerArray("C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case2Answers.txt",result.length);
 			System.out.println("Answers:");
 			fb.printBoolean(answers);
 			assertArrayEquals(result,answers);
@@ -82,8 +82,8 @@ class friendRequestTest {
 	
 	@Test
 	void case3() {
-		String case3res = "case3res.txt";
-		String case3req = "case3req.txt";
+		String case3res = "C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case3res.txt";
+		String case3req = "C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case3req.txt";
 		
 		FriendRequest fb = new FriendRequest(18, case3res, case3req);
 		
@@ -96,14 +96,16 @@ class friendRequestTest {
 		System.out.println("Results: ");
 		
 		try {
-			boolean[] result = fb.adjRun();
+			boolean[] result = fb.run();
 			fb.printBoolean(result);
 			
-			boolean[] answers = answerArray("case3Answers.txt",result.length);
+			boolean[] answers = answerArray("C:\\Users\\justi\\eclipse-workspace\\personal_projects\\JavaExamples\\src\\tests\\friendRequestDocs\\case3Answers.txt",result.length);
 			
-			assertArrayEquals(result,answers);
 			System.out.println("Answers:");
 			fb.printBoolean(answers);
+			
+			assertArrayEquals(result,answers);
+			
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

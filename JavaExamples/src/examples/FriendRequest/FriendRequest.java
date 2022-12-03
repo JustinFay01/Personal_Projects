@@ -1,10 +1,15 @@
-package examples;
+package examples.FriendRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Set;
+
+import datastructures.*;
 /*
  * You are also given a 0-indexed 2D integer array restrictions, where
  * restrictions[i] = [xi, yi] means that person xi and person yi cannot become
@@ -44,7 +49,7 @@ public class FriendRequest {
 		int[][] restrictions = readInput(fileRestriction);
 		int[][] requests = readInput(fileRequest);
 		
-		boolean[] result = makeRequest(people, restrictions, requests);
+		boolean[] result = friendRequests(people, restrictions, requests);
 		
 		return result;
 	}
@@ -57,6 +62,62 @@ public class FriendRequest {
 		
 		return result;
 	}
+	
+	public boolean[] friendRequests(int n, int[][] restrictions, int[][] requests) {
+        DSU dsu = new DSU(n, restrictions);
+        int r = requests.length;
+        boolean res[] = new boolean[r];
+        for(int i = 0; i < r; i++) {
+            int req[] = requests[i];
+            res[i] = dsu.union(req[0], req[1]);
+        }
+        return res;
+    }
+	
+
+    static class DSU {
+        
+        Map<Integer, Set<Integer>> cmpToNodes = new HashMap<>();
+        int parent[];
+        int[][] restrictions;
+        DSU(int n, int[][] restrictions) {
+            parent = new int[n];
+            for(int i = 0; i < n; i++) {
+                Set s = new HashSet<>();
+                s.add(i);
+                cmpToNodes.put(i, s);
+                parent[i] = i;
+            }
+            this.restrictions = restrictions;
+        }
+        
+        int find(int u) {
+            if(u == parent[u]) return u;
+            return parent[u] = find(parent[u]);
+        }
+        
+        boolean union(int u, int v) {
+            int pu = find(u);
+            int pv = find(v);
+            
+            if(pu != pv) {
+                Set<Integer> setU = cmpToNodes.get(pu);
+                Set<Integer> setV = cmpToNodes.get(pv);
+                for(int restrict[] : restrictions) {
+                    int x = restrict[0];
+                    int y = restrict[1];
+                    boolean foundX = setU.contains(x) || setV.contains(x);
+                    boolean foundY = setU.contains(y) || setV.contains(y);
+                    if(foundX && foundY) return false;
+                }
+                setV.addAll(setU);
+                parent[pu] = parent[pv];
+            }
+            return true;
+        }
+	
+    }
+	
 	
 	/*
 	 * Print results
@@ -83,6 +144,35 @@ public class FriendRequest {
 		  System.out.println();
 	}
 	
+	
+	public boolean[] makeRequestUnionFind(int n, int[][] restrictions, int[][] requests) {
+		//add separate pointer to restrictions when adding friends if any element in the set 
+		//to be added contains any element that one of the nodes requested cannot join it returns false
+		//otherwise 
+		
+		boolean[] result = new boolean[requests.length];
+		UnionFind set = new UnionFind(n);
+		
+		  for(int i = 0; i < restrictions.length; i++){
+	           
+	            
+	        } 
+		  int count = 0;
+		  for(int i = 0; i < requests.length; i++) {
+			  int from = requests[i][0];
+			  int to = requests[i][1];
+			  
+			  if(!set.connected(from,to)) {
+				  result[count++] = true;
+				  set.unify(from, to);
+				 
+			  }
+			  else
+				  result[count++] = false;
+		  }
+		return result;
+		
+	}
 	
 	public boolean[] makeRequestAdjacencyList(int n, int[][] restrictions, int[][] requests) {
 		HashMap<Integer, ArrayList<Integer>> adjList = new HashMap<>();
@@ -140,51 +230,66 @@ public class FriendRequest {
 //	        .map(i -> matrix[i][column]).toArray();
 //	}
 	public boolean[] makeRequest(int n, int[][] restrictions, int[][] requests) {
-	      boolean[] result = new boolean[requests.length];
-			//Set up restriction matrix
-	        //check restriction matrix to see if they can be accepted
-	        int[][] restrictionMatrix = new int[n][n];
-	        
+	       boolean[] result = new boolean[requests.length];
+				//Set up restriction matrix
+		        //check restriction matrix to see if they can be accepted
+		        int[][] restrictionMatrix = new int[n][n];
+	            for(int i = 0; i < restrictions.length; i++){
+		            restrictionMatrix[restrictions[i][0]][restrictions[i][1]] = 1;
+		            restrictionMatrix[restrictions[i][1]][restrictions[i][0]] = 1;
+		            
+		        } 
+	            System.out.println("First restriction matrix");
+	            System.out.println(Arrays.deepToString(restrictionMatrix));
+	            
+	            
+	            
+	            //Set initial closure 
+	            // restrictionMatrix = transitiveClosure(restrictionMatrix);
+	            
+	           
 
-	        //Fill restrictions
-	        for(int i = 0; i < restrictions.length; i++){
-	            restrictionMatrix[restrictions[i][0]][restrictions[i][1]] = 1;
-	            restrictionMatrix[restrictions[i][1]][restrictions[i][0]] = 1;
-	        }
+		         int count = 0;
+		         
+		        //Check if friend can be added
+		         for(int i = 0; i < requests.length; i++){
+		             
+		            int req = requests[i][0];
+		            int requested = requests[i][1];
+		               
+		                if(restrictionMatrix[req][requested] == 0){
+		                    result[count++] = true;
 
-	         int count = 0;
-	         
-	        //Check if friend can be added
-	         for(int i = 0; i < requests.length; i++){
-	             
-	            int req = requests[i][0];
-	            int requested = requests[i][1];
-	               
-	                if(restrictionMatrix[req][requested] == 0){
-	                    result[count++] = true;
+		                    //when added change the requesters restrictions 
+		                    //to the requested restrictions as well
+		                    //Creates Transitive closure 
+		                    for(int c = 0; c < restrictionMatrix[0].length; c++){
+		                        if(restrictionMatrix[req][c] == 1 && restrictionMatrix[requested][c] != 1 && req != c){
+		                            restrictionMatrix[requested][c] = 1;
+		                            restrictionMatrix[c][requested] = 1;
+		                        }
+		                       if(restrictionMatrix[requested][c] == 1 && restrictionMatrix[req][c] != 1 && requested != c){
+		                          
+		                           restrictionMatrix[req][c] = 1;
+		                            restrictionMatrix[c][req] = 1;
 
-	                    //when added change the requesters restrictions 
-	                    //to the requested restrictions as well
-	                    for(int c = 0; c < restrictionMatrix[0].length; c++){
-	                        if(restrictionMatrix[req][c] == 1 && restrictionMatrix[requested][c] != 1 && req != c){
-	                            restrictionMatrix[requested][c] = 1;
-	                            restrictionMatrix[c][requested] = 1;
-	                        }
-	                        if(restrictionMatrix[requested][c] == 1 && restrictionMatrix[req][c] != 1 && requested != c){
-	                          
-	                            restrictionMatrix[req][c] = 1;
-	                            restrictionMatrix[c][req] = 1;
-
-	                        }        
-	                    }
-	                }
-	            else
-	                result[count++] = false;
-	        }
-			
-			return result;
-
-	    }
+		                        }   
+	                               
+		                    }
+	                        System.out.println("Restriction matrix after succesfull friend add");
+	                        System.out.println( Arrays.deepToString(restrictionMatrix) );
+		                }
+		            else
+		                result[count++] = false;
+		        }
+	            System.out.println("Final");
+	                        System.out.println( Arrays.deepToString(restrictionMatrix) );
+				
+				return result;
+				
+	    }	
+	
+        
 	
 	/**
 	 * Get how many lines are in file
