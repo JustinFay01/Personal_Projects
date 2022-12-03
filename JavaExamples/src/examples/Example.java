@@ -36,6 +36,44 @@ public class Example {
 		
 	}
 	
+	public int[][] transitiveClosure(int[][] restrictionMatrix){
+		int[][] r = restrictionMatrix;
+		
+		for(int row = 0; row < r.length; row++) {
+			for(int col = 0; col < r[0].length; col++) {
+				if(r[col][row] == 1) {
+					for(int k = 0; k < r.length; k++) {
+						if(r[col][row] == 1 && r[row][k] == 1)
+							r[col][k] = 1;
+					}
+				}	
+			}
+		}
+		return r;
+		
+	}
+	
+	public void displayTC(int V, int[][] tc)
+    {
+        System.out.println("\nTransitive closure :\n");
+        System.out.print(" ");
+        for (int v = 0; v < V; v++)
+           System.out.print("   " + v );
+        System.out.println();
+        for (int v = 0; v < V; v++) 
+        {
+            System.out.print(v +" ");
+            for (int w = 0; w < V; w++) 
+            {
+                if (tc[v][w] == 1) 
+                    System.out.print("  * ");
+                else                  
+                    System.out.print("    ");
+            }
+            System.out.println();
+        }
+    }
+	
 	
 	//My Presorting 2 sum
 	 public int[] twoSum(int[] nums, int target) {
