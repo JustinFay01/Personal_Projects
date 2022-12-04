@@ -8,7 +8,6 @@ print(page)
  # will display HTTP reponse codes 200 - 299 is sucessful
 
 soup = BeautifulSoup(page.content, 'html.parser')
-print(soup)
 
 
 titles = soup.find_all('h3', class_="base-search-card__title")
