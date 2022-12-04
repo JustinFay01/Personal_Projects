@@ -1,24 +1,9 @@
 package examples;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Algorithims {
-
-	// USED FOR MF KNAPSACK
-	private static int[] weights = { 0, 2, 1, 3, 2 };
-	private static int[] values = { 0, 12, 10, 20, 15 };
-	public static int capacity = 6;
-	public static int[][] sack = new int[values.length][capacity];
-	// USED FOR MFKNAPSACK
-
-	public static void loadSack() {
-		for (int i = 0; i < sack.length; i++) {
-			for (int j = 0; j < sack[0].length; j++) {
-				if (i == 0 || j == 0)
-					sack[i][j] = 0;
-				else
-					sack[i][j] = -1;
-			}
-		}
-	}
 
 	/*
 	 * Use the memory function saver for the Knap Sack problem
@@ -55,7 +40,36 @@ public class Algorithims {
 		}
 		return sack[i][j];
 	}
+	
+	// USED FOR MF KNAPSACK
+		private static int[] weights = { 0, 2, 1, 3, 2 };
+		private static int[] values = { 0, 12, 10, 20, 15 };
+		public static int capacity = 6;
+		public static int[][] sack = new int[values.length][capacity];
+		// USED FOR MFKNAPSACK
 
+		public static void loadSack() {
+			for (int i = 0; i < sack.length; i++) {
+				for (int j = 0; j < sack[0].length; j++) {
+					if (i == 0 || j == 0)
+						sack[i][j] = 0;
+					else
+						sack[i][j] = -1;
+				}
+			}
+		}
+		
+		public static void print2D(int arr[][]) {
+			// Loop through all rows
+			for (int[] row : arr)
+
+				// converting each row as string
+				// and then printing in a separate line
+				System.out.println(Arrays.toString(row));
+		}
+///////////////////////////////END OF KNAP SACK//////////////////////////////////////////////
+		
+		
 	public boolean binarySearch(int[] toSearch, int searching, int l, int r) {
 		int mid = (l + r) / 2;
 		if (searching == toSearch[mid])
@@ -71,14 +85,30 @@ public class Algorithims {
 	/**
 	 * return nth number in the fibonacci sequence
 	 */
-	public static int fib(int n) {
-		if (n == 0) {
-			return 0;
-		} else if (n == 1) {
-			return 1;
-		} else { // recursive case
+	public int fib(int n) {
+		if (n <= 1)
+			return n;
+		 else  // recursive case
 			return fib(n - 2) + fib(n - 1);
+	}
+	
+	/*
+	 * Iterative Fib
+	 */
+	public int fibIT(int n) {
+		if(n <= 1) return n;
+		else {
+			int[] fib= new int[n+1];
+			fib[0] = 0;
+			fib[1] = 1;
+			
+			for(int i = 2; i <= n; i++) {
+				fib[i] = fib[i-1] + fib[i-2];
+				
+			}	
+			return fib[n];
 		}
+		
 	}
 
 	/*
