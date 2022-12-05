@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 public class Algorithims {
 
+	
+///////////////////////////////START OF KNAP SACK//////////////////////////////////////////////
 	/*
 	 * Use the memory function saver for the Knap Sack problem
 	 * 
@@ -98,7 +100,8 @@ public class Algorithims {
 	public int fibIT(int n) {
 		if(n <= 1) return n;
 		else {
-			int[] fib= new int[n+1];
+	
+			int[] fib = new int[n+1];
 			fib[0] = 0;
 			fib[1] = 1;
 			
@@ -109,6 +112,30 @@ public class Algorithims {
 			return fib[n];
 		}
 		
+	}
+	
+	
+	/*
+	 * Iterative Fib
+	 */
+	public int fibITInPlace(int n) {
+		if(n <= 1) return n;
+		
+		else {
+			int fib0 = 0;
+			int fib1 = 1;
+			int fibn = 0;
+			
+			for(int i = 2; i <= n; i++) {
+				fibn = fib0 + fib1;
+				
+				int tmp = fib1;
+				fib1 = fibn;
+				fib0 = tmp;
+				
+			}	
+			return fibn;
+		}
 	}
 
 	/*
