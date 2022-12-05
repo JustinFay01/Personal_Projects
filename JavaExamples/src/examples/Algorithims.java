@@ -4,6 +4,43 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Algorithims {
+	
+	
+/**
+ * Start with empty set of edges A of minimal spanning tree G	
+ * 
+ * At each step the algorithim adds an edege uv to A so that the set A union uv is a subset 
+ * of some minimum spanning tree. Such an edge uv is called a safe edge, because we can safley add it 
+ * to the set A and still continue
+ * 
+ * MST(G)
+ * A = emptyElisy
+ * While ! Is SpanningTree (G,A) (add n-1 edges makes it a spanning tree assuming everything else is right)
+ * 	e =  SafeEdge(G,A)
+ * Insert(A, e)	
+ * return a
+ * 
+ * 
+ * how to find safe edge? 
+ * A safe edge is an edge that you can add that is still a minimum spanning tree 
+ * 
+ * 
+ * Start at some vertex 
+ * 
+ * Kruskal-MST(G)
+ * 
+ * A=EmptySet
+ * ForAll v in V[G]
+ * 	create_set(v)
+ * SortAscending(E[G])
+ * ForAll edges e = (u,v)
+ * 	If Set(u) != Set(v)
+ * 		Insert (A, e)
+ * 		Set_Union(u,v)
+ * Return A
+ * 
+ */
+	
 
 	
 ///////////////////////////////START OF KNAP SACK//////////////////////////////////////////////
@@ -22,6 +59,12 @@ public class Algorithims {
 	 * 
 	 * WHEN USING MAKE SURE WEIGHTS AND VALUES HAS AN EXTRA 0 AT THE START OF ARRAYS
 	 * TO MAKE ROOM FOR THE 0'th CAPCITY COLUMN AND ROW START IN BOTTOM RIGHT CORNER
+	 * 
+	 * 
+	 * Run like:
+	 * loadSack();
+	 *	MFKnapsack(weights.length-1, capacity-1);
+	 *	print2D(sack);
 	 */
 	public static int MFKnapsack(int i, int j) {
 		int value = 0;
