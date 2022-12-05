@@ -44,14 +44,13 @@ class algorithimsTest {
 	}
 	
 	@Test
-	void recursiveFibTest() {
-		Algorithims algo = new Algorithims();
-		System.out.println(algo.fib(40));
-	}
-	@Test
 	void itFibTest() {
 		Algorithims algo = new Algorithims();
 		System.out.println(algo.fibIT(60));
+		
+		System.out.println(algo.fibITInPlace(60));
+	
 	}
+		
 
 }
