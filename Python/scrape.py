@@ -2,20 +2,21 @@ from bs4 import BeautifulSoup
 import requests
 from csv import writer
 from requests.adapters import HTTPAdapter, Retry
+from selenium.webdriver.common.by import By
 
 
 
 def make_request(url):
-    session = requests.Session()
-    retry = Retry(connect=3, backoff_factor=0.5)
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount('http://', adapter)
-    session.mount('https://', adapter)
+	session = requests.Session()
+	retry = Retry(connect=3, backoff_factor=0.5)
+	adapter = HTTPAdapter(max_retries=retry)
+	session.mount('http://', adapter)
+	session.mount('https://', adapter)
 
-    return session.get(url)
+	return session.get(url)
 
 
-url= "https://www.linkedin.com/jobs/search/?currentJobId=3357016032&geoId=103644278&keywords=software%20engineer%20intern&location=United%20States&refresh=true"
+url= "https://www.linkedin.com/jobs/search/?currentJobId=3259687197&f_JT=I&geoId=103644278&keywords=software%20engineer%20intern&location=United%20States&refresh=true"
 page = make_request(url)
 # print(page) 
  # will display HTTP reponse codes 200 - 299 is sucessful
@@ -26,9 +27,11 @@ soup = BeautifulSoup(page.content, 'html.parser')
 contents = soup.find_all('a', class_= "base-card__full-link")
 #print(contents)
 
+languages = ['C', 'Java', 'Perl', 'Racket', 'C++', 'Python', 'C#']
+
 with open('softwareinternship.csv', 'w', encoding='utf8', newline='') as f:
 	thewriter = writer(f)
-	header = ['Title','Comapny', 'Link']
+	header = ['Title','Comapny', 'Location', 'Link']
 	thewriter.writerow(header)
 
 	for stuff in contents:
@@ -39,11 +42,17 @@ with open('softwareinternship.csv', 'w', encoding='utf8', newline='') as f:
 		soup = BeautifulSoup(companyPage.content, 'html.parser')
 		#print(soup.prettify)
 
-		company = soup.find('div', class_="relative").find('span').find('a').text.strip()
-		print(company)
-	
+		#Find company name
+		if soup.find('div', class_="relative").find('span').find('a') != 0:
+			company = soup.find('div', class_="relative").find('span').find('a').text.strip()
+		#print(company)
 
-		info = [title, company, links]
+		#Find company location
+		location = soup.find('div', class_="relative").find('span', class_= "topcard__flavor topcard__flavor--bullet").text.strip()
+		#print(location)
+
+
+		info = [title, company, location, links]
 		thewriter.writerow(info)
 
 
