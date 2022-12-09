@@ -2,7 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 from csv import writer
 from requests.adapters import HTTPAdapter, Retry
-from selenium.webdriver.common.by import By
+
+
 
 
 
@@ -18,6 +19,10 @@ def make_request(url):
 
 url= "https://www.linkedin.com/jobs/search/?currentJobId=3259687197&f_JT=I&geoId=103644278&keywords=software%20engineer%20intern&location=United%20States&refresh=true"
 page = make_request(url)
+
+
+
+
 # print(page) 
  # will display HTTP reponse codes 200 - 299 is sucessful
 
@@ -48,7 +53,7 @@ with open('softwareinternship.csv', 'w', encoding='utf8', newline='') as f:
 		#print(company)
 
 		#Find company location
-		location = soup.find('div', class_="relative").find('span', class_= "topcard__flavor topcard__flavor--bullet").text.strip()
+		location = soup.find('div', class_="relative").find('span', class_= "topcard__flavor topcard__flavor--bullet").text
 		#print(location)
 
 
