@@ -6,13 +6,13 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import examples.Algorithims;
+import examples.Algorithms;
 
 class algorithimsTest {
 
 	@Test
 	void coinRowTest() {
-		Algorithims algo = new Algorithims();
+		Algorithms algo = new Algorithms();
 		
 		int[] C = new int[8];
 		C[0] = -1;
@@ -45,7 +45,7 @@ class algorithimsTest {
 	
 	@Test
 	void itFibTest() {
-		Algorithims algo = new Algorithims();
+		Algorithms algo = new Algorithms();
 		System.out.println(algo.fibIT(60));
 		
 		System.out.println(algo.fibITInPlace(60));

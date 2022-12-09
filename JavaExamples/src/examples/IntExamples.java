@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Example {
+public class IntExamples {
 
 	public static void main(String[] args) {
 
@@ -33,6 +33,16 @@ public class Example {
 		return -1;
 	}
 
+	/**
+	 * 
+	 * Given an array of integers nums and an integer target, return indices of the
+	 * two numbers such that they add up to target.
+	 * 
+	 * You may assume that each input would have exactly one solution, and you may
+	 * not use the same element twice.
+	 * 
+	 * You can return the answer in any order.
+	 */
 
 	// My Presorting 2 sum
 	public int[] twoSum(int[] nums, int target) {
@@ -70,45 +80,6 @@ public class Example {
 		return result;
 	}
 
-	// Haves are alike using binary search
-	public static boolean halvesBinary(String s) {
-		int[] vowel = { 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u' };
-		int count1 = 0, count2 = 0;
-		char[] str = s.toCharArray();
-		for (int i = 0; i < str.length; i++) {
-			if (i < str.length / 2) {
-				if (binarySearch(vowel, str[i], 0, vowel.length - 1)) {
-					count1++;
-				}
-			} else if (binarySearch(vowel, str[i], 0, vowel.length - 1))
-				count2++;
-		}
-		return (count1 == count2);
-	}
-
-	// Using sets and going forwards and backwards at same time
-	public boolean halvesAreAlike(String s) {
-		int start = 0;
-		int end = 0;
-		Set<Character> set = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
-		int i = 0;
-		int j = s.length() - 1;
-		while (i < j) {
-			if (set.contains(s.charAt(i))) {
-				start++;
-			}
-			if (set.contains(s.charAt(j))) {
-				end++;
-			}
-			i++;
-			j--;
-		}
-		if (start == end) {
-			return true;
-		}
-		return false;
-	}
-
 //Largest element in array quickly (binary search style)
 	public static int largest(int s[], int l, int r) {
 		int mid = 0;
@@ -130,7 +101,7 @@ public class Example {
 	}
 
 	/*
-	 * Find a sum of perfect
+	 * Find a sum of perfect squares
 	 */
 	public static int sumOfSquares(int x, int n) {
 		int sum = 0;
@@ -175,74 +146,6 @@ public class Example {
 		} else {
 			return n * factorial(n - 1);
 		}
-	}
-
-	// DO IT BACKWARDS
-	public int romanToIntBetter(String s) {
-		int ans = 0, num = 0;
-		for (int i = s.length() - 1; i >= 0; i--) {
-			switch (s.charAt(i)) {
-			case 'I':
-				num = 1;
-				break;
-			case 'V':
-				num = 5;
-				break;
-			case 'X':
-				num = 10;
-				break;
-			case 'L':
-				num = 50;
-				break;
-			case 'C':
-				num = 100;
-				break;
-			case 'D':
-				num = 500;
-				break;
-			case 'M':
-				num = 1000;
-				break;
-			}
-			if (4 * num < ans)
-				ans -= num;
-			else
-				ans += num;
-		}
-		return ans;
-	}
-
-	/*
-	 * Reverse words and use trim statement to delete extra white space
-	 */
-	public String reverseWords(String s) {
-
-		s = s.trim().replaceAll(" +", " ");
-
-		String[] str = s.split(" ");
-		int j = str.length - 1;
-
-		for (int i = 0; i < str.length / 2; i++, j--) {
-
-			String tmp = str[j];
-			str[j] = str[i];
-			str[i] = tmp;
-		}
-
-		s = String.join(" ", str);
-		return s;
-	}
-
-	public static boolean binarySearch(int[] toSearch, int searching, int l, int r) {
-		int mid = (l + r) / 2;
-		if (searching == toSearch[mid])
-			return true;
-		else if (searching < toSearch[mid])
-			return binarySearch(toSearch, searching, l, mid - 1);
-		else if (searching > toSearch[mid])
-			return binarySearch(toSearch, searching, mid + 1, r);
-		else
-			return false;
 	}
 
 }
