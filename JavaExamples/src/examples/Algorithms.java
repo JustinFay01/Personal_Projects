@@ -3,8 +3,56 @@ package examples;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Algorithims {
+public class Algorithms {
 	
+	
+	
+	public boolean isBipartite(int n, int edges[][]) {
+		int[][] values = new int[n][n]	;
+		
+		for(int row = 0; row < edges.length; row++) {
+					
+				int from = edges[row][0];
+				int to = edges[row][1];
+				
+				
+				values[from][to] = 3;
+				values[to][from] = 3;
+				
+				int fromGroup = values[from][from];
+				int toGroup = values[to][to];
+				//if neither have a value set
+				if(fromGroup== 0 && toGroup == 0) {
+					values[from][from] = 1;
+					values[to][to] = 2;
+				}
+				
+				//if one of them has a value set
+				else if(fromGroup == 0 || toGroup == 0) {				
+					if(fromGroup == 1 || fromGroup == 2) {
+						if(fromGroup == 1)
+							values[to][to] = 2;
+						else
+							values[to][to] = 1;
+					}
+					if(toGroup == 1) {
+						if(toGroup == 2) {
+							values[from][from] = 1;						
+						}
+						else
+							values[from][from] = 2;
+					}																					
+				}
+				//if they are equal
+				else if(fromGroup == toGroup) {
+					print2D(values);
+					return false;
+				}
+		}
+		print2D(values);
+		return true;
+	
+	}
 	
 /**
  * Start with empty set of edges A of minimal spanning tree G	
