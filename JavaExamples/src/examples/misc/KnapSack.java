@@ -1,4 +1,4 @@
-package examples.FriendRequest;
+package examples.misc;
 
 import java.util.Arrays;
 
