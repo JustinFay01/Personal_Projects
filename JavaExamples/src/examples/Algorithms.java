@@ -7,6 +7,7 @@ public class Algorithms {
 	
 	
 	
+	
 	public boolean isBipartite(int n, int edges[][]) {
 		int[][] values = new int[n][n]	;
 		
