@@ -15,12 +15,14 @@ public class Algorithms {
 				int from = edges[row][0];
 				int to = edges[row][1];
 				
-				
+				//Make sure edges are there
 				values[from][to] = 3;
 				values[to][from] = 3;
 				
+				//Color
 				int fromGroup = values[from][from];
 				int toGroup = values[to][to];
+				
 				//if neither have a value set
 				if(fromGroup== 0 && toGroup == 0) {
 					values[from][from] = 1;

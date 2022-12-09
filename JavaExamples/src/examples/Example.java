@@ -10,6 +10,51 @@ public class Example {
 	public static void main(String[] args) {
 
 	}
+	
+	//Determine if two strings are isomorphic using dictionary
+    public boolean isIsomorphic(String s, String t) {
+        
+        int[] mappingDictStoT = new int[256];
+        Arrays.fill(mappingDictStoT, -1);
+        
+        int[] mappingDictTtoS = new int[256];
+        Arrays.fill(mappingDictTtoS, -1);
+        
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            char c2 = t.charAt(i);
+            
+            // Case 1: No mapping exists in either of the dictionaries
+            if (mappingDictStoT[c1] == -1 && mappingDictTtoS[c2] == -1) {
+                mappingDictStoT[c1] = c2;
+                mappingDictTtoS[c2] = c1;
+            }
+            
+            // Case 2: Ether mapping doesn't exist in one of the dictionaries or Mapping exists and
+            // it doesn't match in either of the dictionaries or both 
+            else if (!(mappingDictStoT[c1] == c2 && mappingDictTtoS[c2] == c1)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+	
+	//Determine if two strings are subsequences
+	 public boolean isSubsequence(String s, String t) {
+	        if(s.length()==0 || s==null)
+	            return true;
+	        int sIndex=0,tIndex=0;
+	        while(tIndex<t.length()){
+	            if(t.charAt(tIndex)==s.charAt(sIndex)){
+	                sIndex++;
+	                if(sIndex==s.length())
+	                    return true;
+	                }
+	                tIndex++;
+	        }
+	        return false;
+	    }
 
 	// Computing pivotIndex for Equilibrium Value
 	public int pivotIndex(int[] nums) {

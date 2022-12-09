@@ -13,16 +13,6 @@ public class Main {
 				{2,3},
 				};
 		
-		algo.print2D(bipartite);
-		//A Goes to B
-		
-		//A goes to C
-//		bipartite[1][0] = 0;
-//		bipartite[1][1] = 2;
-//		
-//		//C Goes to D
-//		bipartite[2][0] = 2;
-//		bipartite[2][1] = 3;
 		
 		if(algo.isBipartite(4, bipartite))
 			System.out.println("It is!");
