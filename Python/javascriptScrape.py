@@ -49,7 +49,9 @@ password = "zKswiG4cRt6TU*!"
 # ## Setup chrome options
 chrome_options = Options()
 #chrome_options.add_argument("--headless") # Ensure GUI is off
-# chrome_options.add_argument("--no-sandbox")
+#chrome_options.add_argument("--no-sandbox")
+
+#chrome_options.add_argument('--proxy-server=%s' % proxy)
 
 #Set driver path
 homedir = os.path.expanduser("~")
@@ -61,8 +63,10 @@ driver = webdriver.Chrome(service=webdriver_service)
 
 # Opening linkedin website
 driver.get("https://www.linkedin.com")
+
+
 # waiting load
-time.sleep(2)
+time.sleep(1)
 
 # Maximizing browser window to avoid hidden elements
 driver.set_window_size(1024, 600)
@@ -80,13 +84,13 @@ search = driver.find_element(By.NAME,"session_key")
 time.sleep(2)
 search.send_keys(email)
 search.send_keys(Keys.RETURN)
-time.sleep(4)
+time.sleep(1)
 
 search = driver.find_element(By.NAME, "session_password")
-time.sleep(3)
+time.sleep(2)
 search.send_keys(password)
 search.send_keys(Keys.RETURN)
-time.sleep(5)
+time.sleep(2)
 
 #Get Software Engineer Page
 driver.get(url)
