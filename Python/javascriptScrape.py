@@ -12,9 +12,14 @@ import requests
 
 #Selenium
 from selenium.webdriver import Chrome
+#preforms actions
 from selenium import webdriver
+
 from selenium.webdriver.common.by import By
+
 from selenium.webdriver.chrome.service import Service
+
+#key strokes
 from selenium.webdriver.common.keys import Keys
 
 from selenium.webdriver.chrome.options import Options
@@ -22,20 +27,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def make_request(url):
-	session = requests.Session()
-	retry = Retry(connect=3, backoff_factor=0.5)
-	adapter = HTTPAdapter(max_retries=retry)
-	session.mount('http://', adapter)
-	session.mount('https://', adapter)
-
-	return session.get(url)
-
-
-# Variables
-# Linkedin ID and PASSWORD
-email = "JustinFay74@gmail.com"
-password = "topsecret123"
 
 # Write here the job position and local for search
 position = "software engineer iternships"
@@ -47,10 +38,12 @@ position = position.replace(' ', "%20")
 local = local.replace(' ', "%20")
 
 
+url = "https://www.linkedin.com/jobs/search/?currentJobId=3379159561&geoId=103644278&keywords=software%20engineer%20internships&location=United%20States&refresh=true"
 
-
-url = "https://www.linkedin.com/jobs/search/?currentJobId=3303863689&f_JT=I&f_WT=2%2C3&geoId=103644278&keywords={position}&location={local}&refresh=true"
-
+# Variables
+# Linkedin ID and PASSWORD
+email = "Justin.Fay@hope.edu"
+password = "zKswiG4cRt6TU*!" 
 
 
 # ## Setup chrome options
@@ -64,10 +57,10 @@ webdriver_service = Service(f"{homedir}/chromedriver/stable/chromedriver")
 driver = Chrome(executable_path=f"{homedir}/chromedriver/stable/chromedriver")
 
 #get browser using chrome options
-driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
+driver = webdriver.Chrome(service=webdriver_service)
 
 # Opening linkedin website
-driver.get(url)
+driver.get("https://www.linkedin.com")
 # waiting load
 time.sleep(2)
 
@@ -75,63 +68,58 @@ time.sleep(2)
 driver.set_window_size(1024, 600)
 driver.maximize_window()
 
+"""
+Can Access Elements in Selenium by
+Id - Guaranteed to be unique
+Name - Not Guaranteed to be unique but might be okay 
+Class - Worse situation
+Tag
+"""
+
+search = driver.find_element(By.NAME,"session_key")
+time.sleep(2)
+search.send_keys(email)
+search.send_keys(Keys.RETURN)
+time.sleep(4)
+
+search = driver.find_element(By.NAME, "session_password")
+time.sleep(3)
+search.send_keys(password)
+search.send_keys(Keys.RETURN)
+time.sleep(5)
+
+#Get Software Engineer Page
+driver.get(url)
+time.sleep(1)
 
 
-disc_list = []
-for i in range(1, 5):
-    # click button to change the job list
-    driver.find_element(By.XPATH, f'//button[@aria-label="Page {i}"]').click()
-    # each page show us some jobs, sometimes show 25, others 13 or 21 ¯\_(ツ)_/¯
-    jobs_lists = driver.find_element(By.CLASS_NAME,
-       'scaffold-layout__list-container')  # here we create a list with jobs
-    jobs = driver.find_element(By.CLASS_NAME,
-        'jobs-search-results__list-item')  # here we select each job to count
-    # waiting load
-    time.sleep(1)
-    # the loop below is for the algorithm to click exactly on the number of jobs that is showing in list
-    # in order to avoid errors that will stop the automation
-    for job in range(1, len(jobs)+1):
-        # job click
-        driver.find_element(By.XPATH, 
-            f'/html/body/div[4]/div[3]/div[4]/div/div/main/div/section[1]/div/ul/li[1]').click()
-        # waiting load
-        time.sleep(1)
-        # select job description
-        job_desc = driver.find_element(By.CLASS_NAME, f'jobs-search__right-rail')
-        # get text
-        soup = BeautifulSoup(job_desc.get_attribute(
-            'outerHTML'), 'html.parser')
-        # add text to list
-        disc_list.append(soup.text)
+job_listings = driver.find_elements(By.XPATH,"//main/div[1]/section/div[1]/ul/li")
+print(job_listings)
 
+frame = []
+try:
+	# Extract the job title and other relevant details from each listing
+	for listing in job_listings:
 
-df = pd.DataFrame(disc_list)
+		title = WebDriverWait(listing, 10).until(
+			EC.presence_of_element_located((By.XPATH,".//div/div/div/div[2]/div/a"))
+		)
 
-df = df.replace(['\n',
-                 '^.*?Expect',
-                 '^.*?Qualifications',
-                 '^.*?Required',
-                 '^.*?expected',
-                 '^.*?Responsibilities',
-                 '^.*?Requisitos',
-                 '^.*?Requirements',
-                 '^.*?Qualificações',
-                 '^.*?QualificationsRequired1',
-                 '^.*?você deve ter:',
-                 '^.*?experiência',
-                 '^.*?você:',
-                 '^.*?Desejável',
-                 '^.*?great',
-                 '^.*?Looking For',
-                 '^.*?ll Need',
-                 '^.*?Conhecimento',
-                 '^.*?se:',
-                 '^.*?habilidades',
-                 '^.*?se:',
-                 '^.*?REQUISITOS'
-                 ], '', regex=True)
+		company = WebDriverWait(listing, 10).until(
+			EC.presence_of_element_located((By.XPATH,".//div/div/div/div[2]/div[2]/a"))
+		)
 
+		location = WebDriverWait(listing, 10).until(
+			EC.presence_of_element_located((By.XPATH,".//div/div/div/div[2]/div[3]/ul/li"))
+		)
+		info = [title.text,company.text, location.text]
+		# Print the job title, company, and location
+		#print(f"{title.text} at {company.text} in {location.text}")
+		frame.append(info)
+		time.sleep(1)
+finally:
+	time.sleep(1)
+	driver.quit()
 
-
-print(df)
-
+df = pd.DataFrame(frame)
+print(frame)
