@@ -66,7 +66,7 @@ driver.get("https://www.linkedin.com")
 
 
 # waiting load
-time.sleep(1)
+time.sleep(2)
 
 # Maximizing browser window to avoid hidden elements
 driver.set_window_size(1024, 600)
@@ -84,7 +84,7 @@ search = driver.find_element(By.NAME,"session_key")
 time.sleep(2)
 search.send_keys(email)
 search.send_keys(Keys.RETURN)
-time.sleep(1)
+time.sleep(2)
 
 search = driver.find_element(By.NAME, "session_password")
 time.sleep(2)
@@ -94,7 +94,7 @@ time.sleep(2)
 
 #Get Software Engineer Page
 driver.get(url)
-time.sleep(1)
+time.sleep(2)
 
 
 job_listings = driver.find_elements(By.XPATH,"//main/div[1]/section/div[1]/ul/li")
@@ -120,7 +120,7 @@ try:
 		# Print the job title, company, and location
 		#print(f"{title.text} at {company.text} in {location.text}")
 		frame.append(info)
-		time.sleep(1)
+		time.sleep(2)
 finally:
 	time.sleep(1)
 	driver.quit()
