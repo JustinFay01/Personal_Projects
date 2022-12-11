@@ -1,7 +1,6 @@
 package examples.misc;
 
 import java.util.Arrays;
-import java.util.Has
 
 public class KnapSack {
 
