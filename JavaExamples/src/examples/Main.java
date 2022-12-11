@@ -11,7 +11,6 @@ public class Main {
 		int[][] bipartite = {{0,1},
 				{0,2},
 				{2,3},
-				{1,2}
 				};
 		
 		
@@ -22,7 +21,8 @@ public class Main {
 		
 		
 		int[] numbers = {2000, 2, 45, 7, 750, 1000};
-
+		
+		
 		int max = Arrays.stream(numbers).max().getAsInt();
 		System.out.println(max);
 		
