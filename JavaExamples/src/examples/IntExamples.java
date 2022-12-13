@@ -11,6 +11,32 @@ public class IntExamples {
 
 	}
 
+	/*
+	 * You are given an array prices where prices[i] is the price of a given stock
+	 * on the ith day.
+	 * 
+	 * You want to maximize your profit by choosing a single day to buy one stock
+	 * and choosing a different day in the future to sell that stock.
+	 * 
+	 * Return the maximum profit you can achieve from this transaction. If you
+	 * cannot achieve any profit, return 0.
+	 */
+	//Time O(n)
+	//Space O(1)
+	public int maxProfit(int[] prices) {
+		int prof = 0;
+		int min = Integer.MAX_VALUE;
+
+		for (int i = 0; i < prices.length; i++) {
+			if (prices[i] < min)
+				min = prices[i];
+			else if (prices[i] - min > prof)
+				prof = prices[i] - min;
+		}
+
+		return prof;
+	}
+
 	// Computing pivotIndex for Equilibrium Value
 	public int pivotIndex(int[] nums) {
 		int n = nums.length;
@@ -62,6 +88,15 @@ public class IntExamples {
 		return solutions;
 	}
 
+	/*
+	 * Given an array of integers nums and an integer target, return indices of the
+	 * two numbers such that they add up to target.
+	 * 
+	 * You may assume that each input would have exactly one solution, and you may
+	 * not use the same element twice.
+	 * 
+	 * You can return the answer in any order.
+	 */
 	// Fastest 2 sum while still returning the original indices
 	public int[] twoSumMap(int[] nums, int target) {
 		Map<Integer, Integer> map = new HashMap();

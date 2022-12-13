@@ -11,14 +11,8 @@ public class KnapSack {
 		MFKnapsack(weights.length-1, capacity-1);
 		print2D(sack);
 		
-		for(int i = 0; i < capacity-1; i++) {
-			for(int j = 0; j < weights.length-1; j++) {
-				MFKnapsack(i,j);
-			}
-			print2D(sack);
-		}
-		print2D(sack);
-		
+
+	
 	}
 
 	
@@ -45,7 +39,7 @@ public class KnapSack {
 	
 	// USED FOR MF KNAPSACK
 		private static int[] weights = { 0, 1, 6, 2, 2, 2, 5, 4, 1 };
-		private static int[] values = { 0, 1, 4, 3, 6, 1, 8, 10, 2 };
+		private static int[] values = {  0, 1, 4, 3, 6, 1, 8, 10, 2 };
 		public static int capacity = 11;
 		public static int[][] sack = new int[values.length][capacity];
 		// USED FOR MFKNAPSACK
