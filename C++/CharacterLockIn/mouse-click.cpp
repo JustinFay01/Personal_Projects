@@ -48,7 +48,7 @@ int main()
     POINT p;
     // sets display to be used
     HWND hWnd{0};
-    int s = 20; //20 milliseconds
+    int s = 40; //20 milliseconds
     printf("Welcome to instant character select\nPress Q to quit, C to print current mouse cordinates or hold the corresponding number for the character you want:\n");
     printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n4 -> Chamber..\n5-> Reyna on alt..\n");
 
