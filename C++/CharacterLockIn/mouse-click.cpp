@@ -54,7 +54,7 @@ int main()
     HWND hWnd{0};
     int s = 40; //20 milliseconds
     printf("Welcome to instant character select\nPress Q to quit, C to print current mouse cordinates or hold the corresponding number for the character you want:\n");
-    printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n5 -> Raze..\n 6 -> Sova..\n 7 -> Neon..\n 4 -> Chamber..\n8-> Reyna on alt..\n");
+    printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n5 -> Raze..\n6 -> Sova..\n7 -> Neon..\n8-> Reyna on alt..\n");
 
     int running = 1;
     while (running == 1)
