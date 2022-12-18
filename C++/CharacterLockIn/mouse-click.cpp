@@ -40,6 +40,10 @@ Neon -> x = 1336y = 1344
 Yoru ->x = 1456y = 1346
 x = 1570y = 1347
 x = 1679y = 1344
+
+raze 1011 1338
+sova 1449 1343
+neon 1786 1237
 */ 
 
 int main()
@@ -48,9 +52,9 @@ int main()
     POINT p;
     // sets display to be used
     HWND hWnd{0};
-    int s = 20; //20 milliseconds
+    int s = 40; //20 milliseconds
     printf("Welcome to instant character select\nPress Q to quit, C to print current mouse cordinates or hold the corresponding number for the character you want:\n");
-    printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n4 -> Chamber..\n5-> Reyna on alt..\n");
+    printf("1 -> Reyna..\n2 -> KillyJoy..\n3 -> Jett..\n5 -> Raze..\n6 -> Sova..\n7 -> Neon..\n8-> Reyna on alt..\n");
 
     int running = 1;
     while (running == 1)
@@ -77,7 +81,7 @@ int main()
         }
         else if (GetKeyState('3') & 0x8000)
         {
-            printf("Locking in Jett...\n");
+            printf("Locking in Jett...40\n");
             SetCursorPos(1453, 1239);
             click();
             Sleep(s);
@@ -91,7 +95,31 @@ int main()
             Sleep(s);
             lockin();
         }
-        else if (GetKeyState('5') & 0x8000)
+         else if (GetKeyState('5') & 0x8000)
+        {
+            printf("Locking in Raze...\n");
+            SetCursorPos(1011, 1338);
+            click();
+            Sleep(s);
+            lockin();
+        }
+         else if (GetKeyState('6') & 0x8000)
+        {
+            printf("Locking in Sova...\n");
+            SetCursorPos(1449, 1343);
+            click();
+            Sleep(s);
+            lockin();
+        }
+         else if (GetKeyState('7') & 0x8000)
+        {
+            printf("Locking in Neon...\n");
+            SetCursorPos(1786, 1237);
+            click();
+            Sleep(s);
+            lockin();
+        }
+        else if (GetKeyState('8') & 0x8000)
         {
             printf("Locking in Reyna on Alt...\n");
             SetCursorPos(1220, 1213);
