@@ -69,8 +69,9 @@ public class IntExamples {
 	 * 
 	 * You can return the answer in any order.
 	 */
-
-	// My Presorting 2 sum
+	
+	// My Pre-sorting 2 sum 
+	// Dosen't work since we need to return original indices and the array has been sorted
 	public int[] twoSum(int[] nums, int target) {
 
 		Arrays.sort(nums);

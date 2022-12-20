@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Algorithms algo = new Algorithms();
+		Graphs G = new Graphs();
 		
 		int[][] bipartite = {{0,1},
 				{0,2},
@@ -14,21 +14,30 @@ public class Main {
 				};
 		
 		
-		if(algo.isBipartite(4, bipartite))
+		if(G.isBipartite(4, bipartite))
 			System.out.println("It is!");
 		else
 			System.out.println("NOPE");
 		
+								//A B C D E F G H
+		int[][] DFSGraph = {/*A*/{0,1,0,0,0,0,0,1},
+							/*B*/{1,0,1,0,0,0,0,1},
+							/*C*/{0,1,0,1,0,0,0,1},
+							/*D*/{0,0,1,0,0,0,1,0},
+							/*E*/{0,0,0,0,0,1,0,0},
+							/*F*/{0,0,0,0,1,0,0,0},
+							/*G*/{0,0,0,1,0,0,0,0},
+							/*H*/{1,1,1,0,0,0,0,0}
+							
+		};
 		
-		int[] numbers = {2000, 2, 45, 7, 750, 1000};
+		Graphs.print2D(DFSGraph);
 		
+		System.out.println('\n');
 		
-		int max = Arrays.stream(numbers).max().getAsInt();
-		System.out.println(max);
+		Graphs.printDFS(G.DFS(DFSGraph));
 		
-		
-		
-		
+			
 	}
 
 	

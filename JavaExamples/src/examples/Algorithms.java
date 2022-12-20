@@ -1,61 +1,10 @@
 package examples;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+
 
 public class Algorithms {
 	
-	
-	
-	
-	public boolean isBipartite(int n, int edges[][]) {
-		int[][] values = new int[n][n]	;
-		
-		for(int row = 0; row < edges.length; row++) {
-					
-				int from = edges[row][0];
-				int to = edges[row][1];
-				
-				//Make sure edges are there
-				values[from][to] = 3;
-				values[to][from] = 3;
-				
-				//Color
-				int fromGroup = values[from][from];
-				int toGroup = values[to][to];
-				
-				//if neither have a value set
-				if(fromGroup== 0 && toGroup == 0) {
-					values[from][from] = 1;
-					values[to][to] = 2;
-				}
-				
-				//if one of them has a value set
-				else if(fromGroup == 0 || toGroup == 0) {				
-					if(fromGroup == 1 || fromGroup == 2) {
-						if(fromGroup == 1)
-							values[to][to] = 2;
-						else
-							values[to][to] = 1;
-					}
-					if(toGroup == 1) {
-						if(toGroup == 2) {
-							values[from][from] = 1;						
-						}
-						else
-							values[from][from] = 2;
-					}																					
-				}
-				//if they are equal
-				else if(fromGroup == toGroup) {
-					print2D(values);
-					return false;
-				}
-		}
-		print2D(values);
-		return true;
-	
-	}
 	
 /**
  * Start with empty set of edges A of minimal spanning tree G	
@@ -248,39 +197,6 @@ public class Algorithms {
 		return F;
 	}
 	
-	public int[][] transitiveClosure(int[][] restrictionMatrix) {
-		int[][] r = restrictionMatrix;
 
-		for (int row = 0; row < r.length; row++) {
-			for (int col = 0; col < r[0].length; col++) {
-				if (r[col][row] == 1) {
-					for (int k = 0; k < r.length; k++) {
-						if (r[col][row] == 1 && r[row][k] == 1)
-							r[col][k] = 1;
-					}
-				}
-			}
-		}
-		return r;
-
-	}
-
-	public void displayTC(int V, int[][] tc) {
-		System.out.println("\nTransitive closure :\n");
-		System.out.print(" ");
-		for (int v = 0; v < V; v++)
-			System.out.print("   " + v);
-		System.out.println();
-		for (int v = 0; v < V; v++) {
-			System.out.print(v + " ");
-			for (int w = 0; w < V; w++) {
-				if (tc[v][w] == 1)
-					System.out.print("  * ");
-				else
-					System.out.print("    ");
-			}
-			System.out.println();
-		}
-	}
 
 }
