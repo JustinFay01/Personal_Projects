@@ -10,7 +10,7 @@ import time
 mouse.FAILSAFE = False
 mouse.MINIMUM_DURATION = 0
 mouse.PAUSE = 0
-sleep = .01
+sleep = .025
 
 #Pretty Console
 def printSeperator():
@@ -31,18 +31,18 @@ lockInX = int(screenWidth*.5); lockInY = int(screenHeight*.75)
 #Click Lock In Button
 def lockIn():   
     time.sleep(sleep)
-    mouse.moveTo(lockInX, lockInY)
+    mouse.click(lockInX, lockInY)
 
 #Character Select Sequence
 def agentSelect(character):
     if kb.is_pressed('Ctrl'):
         print("locking in Agent", character + 11, "...")
-        mouse.moveTo(boxOneX + (character * boxLength), boxOneY + boxLength)
+        mouse.click(boxOneX + (character * boxLength), boxOneY + boxLength)
         lockIn()
         time.sleep(sleep)
     else:
         print("Locking in Agent", character + 1, "...")
-        mouse.moveTo(boxOneX + (character * boxLength), boxOneY)
+        mouse.click(boxOneX + (character * boxLength), boxOneY)
         lockIn()
         time.sleep(sleep)
 
@@ -52,6 +52,10 @@ print("Welcome to Auto Agent Select!")
 printSeperator()
 
 print("Hold down keys 1 - 10 (0) to automatically select the an agent within that box on the top row! Then press 'q' to quit")
+print("Cheat Sheet: ")
+print("Reyna = Ctrl + 4")
+print("Kill Joy = 9")
+printSeperator()
 
 while True:  # making a loop
     input = kb.read_key()
