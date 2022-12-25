@@ -33,6 +33,19 @@ def lockIn():
     time.sleep(sleep)
     mouse.moveTo(lockInX, lockInY)
 
+#Character Select Sequence
+def agentSelect(character):
+    if kb.is_pressed('Ctrl'):
+        print("locking in Agent", character + 11, "...")
+        mouse.moveTo(boxOneX + (character * boxLength), boxOneY + boxLength)
+        lockIn()
+        time.sleep(sleep)
+    else:
+        print("Locking in Agent", character + 1, "...")
+        mouse.moveTo(boxOneX + (character * boxLength), boxOneY)
+        lockIn()
+        time.sleep(sleep)
+
 
 #Console Welcome
 print("Welcome to Auto Agent Select!")
@@ -41,61 +54,31 @@ printSeperator()
 print("Hold down keys 1 - 10 (0) to automatically select the an agent within that box on the top row! Then press 'q' to quit")
 
 while True:  # making a loop
-        if kb.is_pressed('q'):  # if key 'q' is pressed 
+    input = kb.read_key()
+    match input:
+        case 'q':
             print('Good Luck!')
             break  # finishing the loop
-        elif kb.is_pressed('1'):
-            print("Locking in Agent 1")
-            mouse.moveTo(boxOneX,boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('2'):
-            print("Locking in Agent 2")
-            mouse.moveTo(boxOneX + (1 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('3'):
-            print("Locking in Agent 3")
-            mouse.moveTo(boxOneX + (2 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('4'):
-            print("Locking in Agent 4")
-            mouse.moveTo(boxOneX + (3 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('5'):
-            print("Locking in Agent 5")
-            mouse.moveTo(boxOneX + (4 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('6'):
-            print("Locking in Agent 6")
-            mouse.moveTo(boxOneX + (5 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('7'):
-            print("Locking in Agent 7")
-            mouse.moveTo(boxOneX + (6 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('8'):
-            print("Locking in Agent 8")
-            mouse.moveTo(boxOneX + (7 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('9'):
-            print("Locking in Agent 9")
-            mouse.moveTo(boxOneX + (8 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        elif kb.is_pressed('0'):
-            print("Locking in Agent 10")
-            mouse.moveTo(boxOneX + (9 * boxLength),boxOneY)
-            lockIn()
-            time.sleep(sleep)
-        
-       
+        case '1':
+            agentSelect(0)
+        case '2':
+            agentSelect(1)
+        case '3':
+            agentSelect(2)
+        case '4':
+            agentSelect(3)
+        case '5':
+            agentSelect(4)
+        case '6':
+            agentSelect(5)
+        case '7':
+            agentSelect(6)
+        case '8':
+            agentSelect(7)
+        case '9':
+            agentSelect(8)
+        case '0':
+            agentSelect(9)
         
             
 
