@@ -9,12 +9,12 @@ float cubeWidth = 20;
 int width = 160, height = 44;
 float zBuffer[160 * 44];
 char buffer[160 * 44];
-int backgroundASCIICode = '.';
+int backgroundASCIICode = ' ';
 int distanceFromCam = 100;
 float horizontalOffset;
 float K1 = 40;
 
-float incrementSpeed = 0.6;
+float incrementSpeed = 0.5;
 
 float x, y, z;
 float ooz;
@@ -83,6 +83,35 @@ int main() {
     B += 0.02;
     C += 0.004;
     usleep(8000 * 2);
+
+    //  cubeWidth = 10;
+    // horizontalOffset = 1 * cubeWidth;
+    // // second cube
+    // for (float cubeX = -cubeWidth; cubeX < cubeWidth; cubeX += incrementSpeed) {
+    //   for (float cubeY = -cubeWidth; cubeY < cubeWidth;
+    //        cubeY += incrementSpeed) {
+    //     calculateForSurface(cubeX, cubeY, -cubeWidth, '@');
+    //     calculateForSurface(cubeWidth, cubeY, cubeX, '$');
+    //     calculateForSurface(-cubeWidth, cubeY, -cubeX, '~');
+    //     calculateForSurface(-cubeX, cubeY, cubeWidth, '#');
+    //     calculateForSurface(cubeX, -cubeWidth, -cubeY, ';');
+    //     calculateForSurface(cubeX, cubeWidth, cubeY, '+');
+    //   }
+    // }
+    // cubeWidth = 5;
+    // horizontalOffset = 8 * cubeWidth;
+    // // third cube
+    // for (float cubeX = -cubeWidth; cubeX < cubeWidth; cubeX += incrementSpeed) {
+    //   for (float cubeY = -cubeWidth; cubeY < cubeWidth;
+    //        cubeY += incrementSpeed) {
+    //     calculateForSurface(cubeX, cubeY, -cubeWidth, '@');
+    //     calculateForSurface(cubeWidth, cubeY, cubeX, '$');
+    //     calculateForSurface(-cubeWidth, cubeY, -cubeX, '~');
+    //     calculateForSurface(-cubeX, cubeY, cubeWidth, '#');
+    //     calculateForSurface(cubeX, -cubeWidth, -cubeY, ';');
+    //     calculateForSurface(cubeX, cubeWidth, cubeY, '+');
+    //   }
+    // }
   }
   return 0;
 }
