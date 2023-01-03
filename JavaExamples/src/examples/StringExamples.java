@@ -5,6 +5,32 @@ import java.util.*;
 public class StringExamples {
 
 	/*
+	 * You are given an array of n strings strs, all of the same length.
+	 * 
+	 * The strings can be arranged such that there is one on each line, making a
+	 * grid. For example, strs = ["abc", "bce", "cae"] can be arranged as:
+	 * 
+	 * You want to delete the columns that are not sorted lexicographically. In the
+	 * above example (0-indexed), columns 0 ('a', 'b', 'c') and 2 ('c', 'e', 'e')
+	 * are sorted while column 1 ('b', 'c', 'a') is not, so you would delete column
+	 * 1.
+	 */
+	public int minDeletionSize(String[] strs) {
+		int deletion = 0;
+
+		for (int c = 0; c < strs[0].length(); c++) {
+			for (int r = 1; r < strs.length; r++) {
+				if (strs[r].charAt(c) < strs[r - 1].charAt(c)) {
+					deletion++;
+					break;
+				}
+			}
+		}
+
+		return deletion;
+	}
+
+	/*
 	 * We define the usage of capitals in a word to be right when one of the
 	 * following cases holds:
 	 * 
@@ -40,7 +66,6 @@ public class StringExamples {
 		// if pass one of the cases
 		return true;
 	}
-
 
 	/*
 	 * Given a pattern and a string s, find if s follows the same pattern.
