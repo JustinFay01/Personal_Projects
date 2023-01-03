@@ -50,19 +50,10 @@ def agentSelect(character):
 #Console Welcome
 print("Welcome to Auto Agent Select!")
 printSeperator()
+# Astra Breach Brim CHamber Cy Fade HArbor Jett Kayo KJ 
+# Neon omen phoneix raze reyna sage skye sova viper yoru
 
-print("Hold down keys 1 - 10 (0) to automatically select the an agent within that box on the top row! Then press 'q' to quit")
-print("Favorites: ")
-print("Jett = 7")
-print("Kill Joy = 9")
-print("Neon = 0")
-print("Raze = Ctrl + 3")
-print("Reyna = Ctrl + 4")
-print("Sova = Ctrl + 7")
-print("Viper = Ctrl + 8")
-printSeperator()
-
-while True:  # making a loop
+while True: 
     input = kb.read_key()
     match input:
         case 'q':
