@@ -38,7 +38,6 @@ public class CandyGame {
 	public void candyDistributor(int lowerLim, int upperLim) {
 		for(int i = 0; i < studentsArray.length; i++)
 			studentsArray[i] = randCandyGenerator(lowerLim, upperLim);
-
 	}
 	
 
