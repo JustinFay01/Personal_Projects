@@ -39,8 +39,9 @@ public class Controller {
 	 */
 	public void playGame() {
 		Scanner sc = new Scanner(System.in);
-
-		while (game.checkGameOver()) {
+		boolean running = true;
+		
+		while (running) {
 			// Number of students being set and checked
 			if (numOfStudents == -1) {
 				System.out.println("Getting the number of students.\n" + "Enter an integer in [15,30] inclusive:");
@@ -62,6 +63,7 @@ public class Controller {
 				smallestNumOfPieces = sc.nextInt();
 			}
 			if (smallestNumOfPieces % 2 > 0 || (smallestNumOfPieces > 10 || smallestNumOfPieces < 4)) {
+				smallestNumOfPieces = -1;
 				System.out.println("Must be EVEN and in [4, 10] inclusive! Re-enter:\n");
 				smallestNumOfPieces = sc.nextInt();
 				continue;
@@ -74,10 +76,11 @@ public class Controller {
 				System.out.println("Getting the upper number of starting candy pieces.\r\n"
 						+ "Must be even and greater than " + smallestNumOfPieces
 						+ " (the lower number) but less than or equal to " + (50 + smallestNumOfPieces) + " (the\r\n"
-						+ "lower number plus 50).\r\n" + "Enter an even integer in [8, 56] inclusive:");
+						+ "lower number plus 50).\r\n" + "Enter an even integer in  [" + smallestNumOfPieces + "," + (50 + smallestNumOfPieces) + "] inclusive:");
 				largeNum = sc.nextInt();
 			}
 			if (largeNum % 2 > 0 || (largeNum > 50 + smallestNumOfPieces || largeNum < smallestNumOfPieces)) {
+				largeNum = -1;
 				System.out.println("Must be EVEN and in [" + smallestNumOfPieces + "," + (50 + smallestNumOfPieces)
 						+ "] inclusive! Re-enter:");
 				largeNum = sc.nextInt();
@@ -85,7 +88,40 @@ public class Controller {
 			} else {
 				largeNum = getEvenInt(smallestNumOfPieces, largeNum);
 			}
-		}
+			
+			//Distribute Candy between the upper and lower bounds
+			System.out.println("The orginal deal is:\n");
+			game.candyDistributor(smallestNumOfPieces, largeNum);
+			game.printFormatter(game.studentsArray);
+			
+			int input = -1;
+			while(game.checkGameOver()) {
+				if(input == -1) {
+					System.out.println("Do you want to print the status after each move? (1 for yes, 0 for no)\r\n"
+							+ "Enter an integer in [0, 1] inclusive:");
+					input = sc.nextInt();		
+				}
+				else if(input != 0 && input != 1) {
+					System.out.println("Must be either [0, 1] inclusive! Re-enter:");
+					input = sc.nextInt();
+					continue;
+				}
+				
+				//input has been selected 
+				if(input == 0) {
+					printAll = false;
+					game.passCandy();
+				}
+				else {
+					game.passCandy();	
+					game.printFormatter(game.studentsArray);	
+				}
+			}
+			if(!printAll)
+					game.printFormatter(game.studentsArray);
+			if(!game.checkGameOver())
+				break;
+		}		
 	}
 
 	/*
@@ -95,7 +131,7 @@ public class Controller {
 	 * of students playing the game.
 	 */
 	public int getInt(int lowerLim, int upperLim) {
-		Random rand = new Random(upperLim);
+		Random rand = new Random();
 		return rand.nextInt(upperLim) + lowerLim;
 	}
 
@@ -105,14 +141,11 @@ public class Controller {
 	 * limits should be passed as parameters to this method.
 	 */
 	public int getEvenInt(int lowerLim, int upperLim) {
-		Random rand = new Random(upperLim);
+		Random rand = new Random();
 		int val = 1;
 		while (val % 2 > 0)
 			val = rand.nextInt(upperLim) + lowerLim;
 		return val;
 	}
 
-	public boolean getPrintPreference() {
-		return printAll;
-	}
 }

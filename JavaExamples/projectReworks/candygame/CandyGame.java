@@ -6,9 +6,7 @@ public class CandyGame {
 
 	int[] studentsArray;
 
-	public CandyGame() {
-
-	}
+	public CandyGame() {}
 
 	/*
 	 * A mutator for the number of students; this accepts an int parameter (the
@@ -24,7 +22,7 @@ public class CandyGame {
 	 * within the range specified by the two parameters passed to this method.
 	 */
 	public int randCandyGenerator(int lowerLim, int upperLim) {
-		Random rand = new Random(upperLim);
+		Random rand = new Random();
 		int val = 1;
 		while (val % 2 > 0)
 			val = rand.nextInt(upperLim) + lowerLim;
@@ -38,10 +36,11 @@ public class CandyGame {
 	 * will need to pass the lower and upper limits as parameters to this method.
 	 */
 	public void candyDistributor(int lowerLim, int upperLim) {
-		for (int student : studentsArray)
-			studentsArray[student] = randCandyGenerator(lowerLim, upperLim);
+		for(int i = 0; i < studentsArray.length; i++)
+			studentsArray[i] = randCandyGenerator(lowerLim, upperLim);
 
 	}
+	
 
 	/*
 	 * A method to print an array of integers on one line using a field width of
@@ -50,7 +49,7 @@ public class CandyGame {
 	public void printFormatter(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
 			if (i == 0)
-				System.out.printf("%6s%4s", arr[i], "");
+				System.out.printf("%4s%4s", arr[i], "");
 			else
 				System.out.printf("%s%4s", arr[i], "");
 		}
