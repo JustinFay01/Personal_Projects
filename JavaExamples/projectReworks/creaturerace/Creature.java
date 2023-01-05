@@ -2,10 +2,10 @@ package creaturerace;
 
 public abstract class Creature {
 	
-	private String name;
-	private int maxSpeed;
-	private char[] track;
-	private int currentPos;
+	String name;
+	int maxSpeed;
+	char[] track;
+	int currentPos;
 	
 	
 	public Creature(String name, int maxSpeed, char[] track, int currentPos) {
@@ -16,7 +16,13 @@ public abstract class Creature {
 	}
 	
 	
-	public abstract int move();
+	public abstract void move(int mp);
+	
+	public void skipTerrain() {
+		while(currentPos + 1 < track.length && (track[currentPos] == track[currentPos + 1])) {
+			currentPos++;
+		}
+	}
 	
 	public String getName() {
 		return name;
@@ -33,4 +39,6 @@ public abstract class Creature {
 	public char[] getTrack() {
 		return track;
 	}
+	
+
  }
