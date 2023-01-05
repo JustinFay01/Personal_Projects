@@ -1,5 +1,8 @@
 package creaturerace;
 
+/*
+ * Outlines implementation for Race class
+ */
 public interface RaceInterface {
 	// Returns a char array representing the racetrack
 	char[] getRacetrack();

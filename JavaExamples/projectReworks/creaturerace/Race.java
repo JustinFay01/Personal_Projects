@@ -3,11 +3,12 @@ package creaturerace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
-
+/*
+ * Used to control and play out the creature race
+ */
 public class Race implements RaceInterface {
 
 	private char[] track;
@@ -23,6 +24,9 @@ public class Race implements RaceInterface {
 		overTheTopNames();
 	}
 	
+	/*
+	 * Used to have as many random names as possible.
+	 */
 	public void overTheTopNames() {
 		toManyNames = new ArrayList<>();		
 		try {
@@ -32,7 +36,7 @@ public class Race implements RaceInterface {
 			while(scan.hasNext()) {
 				toManyNames.add(scan.next());
 			}	
-			
+			scan.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!");
 		}	
