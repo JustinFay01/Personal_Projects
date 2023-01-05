@@ -42,7 +42,7 @@ public class Ostrich extends Creature {
 						break;
 					}
 
-				}  else {// any other lose one
+				} else {// any other lose one
 					if (mp >= 1) {
 						mp--;
 						currentPos++;
@@ -51,7 +51,6 @@ public class Ostrich extends Creature {
 				}
 
 			}
-			
 
 		}
 	}

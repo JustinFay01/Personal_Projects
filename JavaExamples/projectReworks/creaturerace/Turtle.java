@@ -15,7 +15,7 @@ public class Turtle extends Creature {
 	@Override
 	public void move(int mp) {
 		while (mp > 0) {
-				
+
 			if (track[getCurrentPos()] == '|') {
 				break;
 			} else {

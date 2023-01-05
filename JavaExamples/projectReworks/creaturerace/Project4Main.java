@@ -2,23 +2,23 @@ package creaturerace;
 
 public class Project4Main {
 
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
 		Race raceObj = new Race();
-		//int length, int numRacers
-		raceObj.createRace(10000, 10000);
-		
-		
-		while(!raceObj.gameOver()) {
-			raceObj.advanceOneTurn();
-		}
-		
+		// int length, int numRacers
+		// raceObj.createRace(10, 10);
+
+		// while(!raceObj.gameOver()) {
+		// raceObj.advanceOneTurn();
+		// }
+
+		// System.out.println();
+
+		// raceObj.printAll();
+		// raceObj.findAndPrintWinners();
+
 		System.out.println();
-		
-		raceObj.printAll();
-		raceObj.findAndPrintWinners();
-		
-		
-		
+		raceObj.averageWinner(37, 10, 10000);
+
 //		char[] testTrack = {'.', '~', '~', '#', '.', '~', '.', 'O', 'O', '#', 'O', '|' };
 //		//create monkey
 //		//create raceTrack

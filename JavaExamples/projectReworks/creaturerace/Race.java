@@ -3,6 +3,7 @@ package creaturerace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -154,6 +155,7 @@ public class Race implements RaceInterface {
 			printTrack(c); //Print the track with the correct flag
 
 		}
+		findAndPrintWinners();
 	}
 
 	/*
@@ -196,6 +198,47 @@ public class Race implements RaceInterface {
 				System.out.println(creaturesArr[i].name);
 			}
 		}
+	}
+	
+	public void averageWinner(int length, int numRacers, int loops) {
+		double m = 0, o = 0, t = 0, tie = 0;//counts for each loop
+		int tM = 0, tO = 0, tT = 0; //count total amounts of animals each time
+		for(int i = 0; i < loops ; i++) {
+			
+			ArrayList<Creature> winArr = new ArrayList<>();
+			
+			createRace(length, numRacers);
+			while(!gameOver()) 
+				advanceOneTurn();
+			for(int j = 0; j < creaturesArr.length; j++) {
+				Creature c = creaturesArr[j];
+					if (c instanceof Monkey) 		tM++; //monkey
+					else if (c instanceof Ostrich)  tO++; //ostrich 
+					else /*(must be turtle)*/		tT++; //turtle 
+				if(getRacerIsWinner(c.getCurrentPos())) 
+					winArr.add(c);
+			}
+			
+			// Eliminate ties 
+			if(winArr.size() > 1) tie++; //More than one winner must mean tie
+			else {
+				if (winArr.get(0) instanceof Monkey) 		m++; //monkey
+				else if (winArr.get(0) instanceof Ostrich)  o++; //ostrich 
+				else /*(must be turtle)*/					t++; //turtle 
+			}
+			
+			System.out.println("\nGame " + (i+1) + " is over, resuts are: \n");
+			printAll();
+		}
+		
+		String format = "%s %15.2f%% %3s %d %s%n";  
+		String postPercentage = "of the time, With a total of";
+		System.out.println("\nThe totals are: ");
+		System.out.printf(format, "One Monkey won:", (m/loops) * 100, postPercentage, tM, "Monkey's");
+		System.out.printf(format, "One Ostrich won:", (o/loops) * 100, postPercentage, tO, "Ostrich's");
+		System.out.printf(format, "One Turtle won:", (t/loops) * 100, postPercentage, tT, "Turtle's\n");
+		System.out.printf(format, "It was a Tie: ", (tie/loops) * 100, postPercentage, (int) tie, "Tie's");
+		
 	}
 
 }
