@@ -6,7 +6,8 @@ public class Project4Main {
 		Race raceObj = new Race();
 		raceObj.createRace(12, 10);
 		
-		//raceObj.printAll();
+		raceObj.printAll();
+		
 		
 		while(!raceObj.gameOver()) {
 			raceObj.advanceOneTurn();
