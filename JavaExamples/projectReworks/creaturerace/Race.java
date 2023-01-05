@@ -1,7 +1,5 @@
 package creaturerace;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Race implements RaceInterface {

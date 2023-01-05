@@ -1,7 +1,5 @@
 package creaturerace;
 
-import java.util.Arrays;
-
 public class Project4Main {
 
 	public static void main(String[] args) {	
