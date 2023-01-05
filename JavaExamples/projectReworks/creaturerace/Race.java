@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class Race implements RaceInterface {
 
 	private char[] track;
@@ -97,16 +98,18 @@ public class Race implements RaceInterface {
 		for (int i = 0; i < numRacers; i++) {
 
 			int c = r.nextInt(3) + 1; // Number of creatures but nextInt is exclusive on the Upper Bound
-
+			String capName= toManyNames.get(r.nextInt(toManyNames.size())).toLowerCase();
+			String name= capName.substring(0,1).toUpperCase() + capName.substring(1,capName.length());
+			
 			switch (c) {
 			case 1: // Monkey
-				creaturesArr[i] = new Monkey(toManyNames.get(r.nextInt(toManyNames.size())), MONKEY_MAX, track, 0); //If using small name list do (names[r.nextInt(names.length)]
+				creaturesArr[i] = new Monkey(name, MONKEY_MAX, track, 0); //If using small name list do (names[r.nextInt(names.length)]
 				break;
 			case 2: // Ostrich
-				creaturesArr[i] = new Ostrich(toManyNames.get(r.nextInt(toManyNames.size())), OSTRICH_MAX, track, 0);//If using small name list do (names[r.nextInt(names.length)]
+				creaturesArr[i] = new Ostrich(name, OSTRICH_MAX, track, 0);//If using small name list do (names[r.nextInt(names.length)]
 				break;
 			case 3: // Turtle
-				creaturesArr[i] = new Turtle(toManyNames.get(r.nextInt(toManyNames.size())), TURTLE_MAX, track, 0);//If using small name list do (names[r.nextInt(names.length)]
+				creaturesArr[i] = new Turtle(name, TURTLE_MAX, track, 0);//If using small name list do (names[r.nextInt(names.length)]
 				break;
 			default:
 				System.out.println("Error No Creature to create");

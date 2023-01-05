@@ -4,9 +4,8 @@ public class Project4Main {
 
 	public static void main(String[] args) {	
 		Race raceObj = new Race();
-		raceObj.createRace(12, 10);
-		
-		raceObj.printAll();
+		//int length, int numRacers
+		raceObj.createRace(10000, 10000);
 		
 		
 		while(!raceObj.gameOver()) {
