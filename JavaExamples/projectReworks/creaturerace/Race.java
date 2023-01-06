@@ -3,6 +3,9 @@ package creaturerace;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -204,6 +207,23 @@ public class Race implements RaceInterface {
 		}
 	}
 	
+	
+	//Change to dictionary method so we can avoid n^2
+	public void displayOrder() {
+		System.out.println();
+		int count = 1;
+			for(int j = creaturesArr.length-1 ; j >= 0; j--) {
+				for(int i = 0; i < creaturesArr.length; i++) {
+					if(creaturesArr[i].getCurrentPos() == j)
+						System.out.print(count + ". " + creaturesArr[i].getName() + " ");
+				}
+				count++;
+			}
+		
+		
+		
+	}
+	
 	public void averageWinner(int length, int numRacers, int loops) {
 		double m = 0, o = 0, t = 0, tie = 0;//counts for each loop
 		int tM = 0, tO = 0, tT = 0; //count total amounts of animals each time
@@ -213,7 +233,7 @@ public class Race implements RaceInterface {
 			
 			createRace(length, numRacers);
 			while(!gameOver()) 
-				advanceOneTurn();
+				advanceOneTurn(); 
 			for(int j = 0; j < creaturesArr.length; j++) {
 				Creature c = creaturesArr[j];
 					if (c instanceof Monkey) 		tM++; //monkey
@@ -235,11 +255,11 @@ public class Race implements RaceInterface {
 			printAll();
 		}
 		
-		String format = "%s %15.2f%% %3s %d %s%n";  
+		String format = "%-15s %15.2f%% %3s %d %s%n";  
 		String postPercentage = "of the time, With a total of";
 		System.out.println("\nThe totals are: ");
 		System.out.printf(format, "One Monkey won:", (m/loops) * 100, postPercentage, tM, "Monkey's");
-		System.out.printf(format, "One Ostrich won:", (o/loops) * 100, postPercentage, tO, "Ostrich's");
+		System.out.printf("%-15s %14.2f%% %3s %d %s%n", "One Ostrich won:", (o/loops) * 100, postPercentage, tO, "Ostrich's");
 		System.out.printf(format, "One Turtle won:", (t/loops) * 100, postPercentage, tT, "Turtle's\n");
 		System.out.printf(format, "It was a Tie: ", (tie/loops) * 100, postPercentage, (int) tie, "Tie's");
 		

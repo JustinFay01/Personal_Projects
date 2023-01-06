@@ -14,7 +14,7 @@ sleep = .025
 
 #Pretty Console
 def printSeperator():
-    for i in range(100):
+    for i in range(120):
         print("=",end= "")
     print("\n")
   
@@ -52,6 +52,20 @@ print("Welcome to Auto Agent Select!")
 printSeperator()
 # Astra Breach Brim CHamber Cy Fade HArbor Jett Kayo KJ 
 # Neon omen phoneix raze reyna sage skye sova viper yoru
+
+agents = ["Astra", "Breach", "Brim", "Chamber", "Cypher", "Fade", "Harbor", "Jett", "Kayo", "KJ",
+             "Neon", "Omen", "Phoneix", "Raze", "Reyna", "Sage", "Skye", "Sova", "Viper", "Yoru" ]
+
+print("hold just the (number) for top row and hold (ctrl + number) for bottom row:\n")
+for i in range (len(agents)):
+    if i == 9 or i == 19:
+        print("0 = " + agents[i] + "|")
+        
+    elif i > 9:
+        print(str(i - 9) + "= " + agents[i] + "|", end=" ")
+    else:
+        print(str(i + 1) + "= " + agents[i] + "|", end=" ")
+print("\n")            
 
 while True: 
     input = kb.read_key()

@@ -5,19 +5,21 @@ public class Project4Main {
 	public static void main(String[] args) {
 		Race raceObj = new Race();
 		// int length, int numRacers
-		// raceObj.createRace(10, 10);
+		 raceObj.createRace(10, 10);
 
-		// while(!raceObj.gameOver()) {
-		// raceObj.advanceOneTurn();
-		// }
+		 while(!raceObj.gameOver()) {
+		 raceObj.advanceOneTurn();
+		}
 
 		// System.out.println();
 
-		// raceObj.printAll();
+		 raceObj.printAll();
+		 
+		 raceObj.displayOrder();
 		// raceObj.findAndPrintWinners();
 
-		System.out.println();
-		raceObj.averageWinner(37, 10, 10000);
+		//System.out.println();
+		//raceObj.averageWinner(60, 15, 5000);
 
 //		char[] testTrack = {'.', '~', '~', '#', '.', '~', '.', 'O', 'O', '#', 'O', '|' };
 //		//create monkey
