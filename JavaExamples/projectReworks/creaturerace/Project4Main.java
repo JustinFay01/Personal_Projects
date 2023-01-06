@@ -16,6 +16,8 @@ public class Project4Main {
 		 raceObj.printAll();
 		 
 		 raceObj.displayOrder();
+		 
+		
 		// raceObj.findAndPrintWinners();
 
 		//System.out.println();

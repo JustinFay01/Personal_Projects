@@ -219,9 +219,6 @@ public class Race implements RaceInterface {
 				}
 				count++;
 			}
-		
-		
-		
 	}
 	
 	public void averageWinner(int length, int numRacers, int loops) {
