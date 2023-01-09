@@ -106,9 +106,9 @@ public class Race implements RaceInterface {
 		for (int i = 0; i < numRacers; i++) {
 
 			int c = r.nextInt(3) + 1; // Number of creatures but nextInt is exclusive on the Upper Bound
-			String capName= toManyNames.get(r.nextInt(toManyNames.size())).toLowerCase();
-			String name= capName.substring(0,1).toUpperCase() + capName.substring(1,capName.length());
-			
+			//String capName= toManyNames.get(r.nextInt(toManyNames.size())).toLowerCase();
+			//String name= capName.substring(0,1).toUpperCase() + capName.substring(1,capName.length());
+			String name = names[r.nextInt(names.length)];
 			switch (c) {
 			case 1: // Monkey
 				creaturesArr[i] = new Monkey(name, MONKEY_MAX, track, 0); //If using small name list do (names[r.nextInt(names.length)]
