@@ -4,25 +4,24 @@ public class Project4Main {
 
 	public static void main(String[] args) {
 		Race raceObj = new Race();
+		
 		// int length, int numRacers
 		 raceObj.createRace(10, 10);
 
+		 //Run the game until it is over
 		 while(!raceObj.gameOver()) {
 		 raceObj.advanceOneTurn();
 		}
 
-		// System.out.println();
 
 		 raceObj.printAll();
 		 
 		 raceObj.displayOrder();
+		 //int lenght, int number of racers, int loops
+		 //raceObj.averageWinner(30, 15, 1000);
+	
 		 
-		
-		// raceObj.findAndPrintWinners();
-
-		//System.out.println();
-		//raceObj.averageWinner(60, 15, 5000);
-
+		 //////////////////TESTING/////////////////////////////////
 //		char[] testTrack = {'.', '~', '~', '#', '.', '~', '.', 'O', 'O', '#', 'O', '|' };
 //		//create monkey
 //		//create raceTrack
