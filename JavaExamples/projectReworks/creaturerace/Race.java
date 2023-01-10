@@ -24,7 +24,7 @@ public class Race implements RaceInterface {
 	private ArrayList<String> toManyNames;
 	
 	public Race() {
-		overTheTopNames();
+		//overTheTopNames();
 	}
 	
 	/*
