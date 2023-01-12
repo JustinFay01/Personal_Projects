@@ -16,6 +16,7 @@ public class StringExamples {
 	 * 
 	 * Time O(n)
 	 * Space O(1)
+	 * testing git up
 	 */
 	public boolean isValid(String s) {
 		Stack<Character> charStack = new Stack<>();
