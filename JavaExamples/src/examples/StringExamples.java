@@ -5,6 +5,54 @@ import java.util.*;
 public class StringExamples {
 
 	/*
+	 * Given a string s containing just the characters '(', ')', '{', '}', '[' and
+	 * ']', determine if the input string is valid.
+	 * 
+	 * An input string is valid if:
+	 * 
+	 * Open brackets must be closed by the same type of brackets. Open brackets must
+	 * be closed in the correct order. Every close bracket has a corresponding open
+	 * bracket of the same type.
+	 */
+	public boolean isValid(String s) {
+		Stack<Character> charStack = new Stack<>();
+		for (int i = 0; i < s.length(); i++) {
+			Character var = s.charAt(i);
+			switch (var) {
+			case ('('):
+				charStack.push(var);
+				break;
+			case ('['):
+				charStack.push(var);
+				break;
+			case ('{'):
+				charStack.push(var);
+				break;
+			case (')'):
+				if (!charStack.empty() && charStack.peek() == '(')
+					charStack.pop();
+				else
+					return false;
+				break;
+			case ('}'):
+				if (!charStack.empty() && charStack.peek() == '{')
+					charStack.pop();
+				else
+					return false;
+				break;
+			case (']'):
+				if (!charStack.empty() && charStack.peek() == '[')
+					charStack.pop();
+				else
+					return false;
+				break;
+			}
+
+		}
+		return (charStack.empty());
+	}
+
+	/*
 	 * You are given an array of n strings strs, all of the same length.
 	 * 
 	 * The strings can be arranged such that there is one on each line, making a
