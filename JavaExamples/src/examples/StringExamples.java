@@ -15,8 +15,7 @@ public class StringExamples {
 	 * bracket of the same type.
 	 * 
 	 * Time O(n)
-	 * Space O(1)
-	 * testing git 
+	 * Space O(n)
 	 */
 	public boolean isValid(String s) {
 		Stack<Character> charStack = new Stack<>();
