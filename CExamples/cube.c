@@ -61,7 +61,7 @@ int main() {
     memset(buffer, backgroundASCIICode, width * height);
     memset(zBuffer, 0, width * height * 4);
     cubeWidth = 20;
-    horizontalOffset = -6 * cubeWidth;
+    horizontalOffset = -10 * cubeWidth;
     // first cube
     for (float cubeX = -cubeWidth; cubeX < cubeWidth; cubeX += incrementSpeed) {
       for (float cubeY = -cubeWidth; cubeY < cubeWidth;
