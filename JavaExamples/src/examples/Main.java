@@ -39,6 +39,11 @@ public class Main {
 		Graphs.printDFS(G.DFS(DFSGraph));
 		
 		
+		IntExamples intPrac = new IntExamples();
+		
+
+		
+		
 		
 			
 	}
