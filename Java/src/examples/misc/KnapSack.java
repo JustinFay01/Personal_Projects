@@ -11,8 +11,8 @@ public class KnapSack {
 	public static int[][] sack = new int[values.length][capacity];
 
 	public static void main(String[] args) {
-		loadSack();
-		MFKnapsack(weights.length - 1, capacity-1);
+		loadSack(); //fil with -1's
+		MFKnapsack(weights.length - 1, capacity-1);//Start in the bottom right square
 		print2D(sack);
 		
 		
