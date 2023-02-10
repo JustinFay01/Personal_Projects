@@ -36,7 +36,6 @@ public class Horspools {
 
     public boolean findString() {
         int tableIndex = searchWord.length() - 1;
-
         for (int i = searchWord.length() - 1; i < input.size(); i++) {
             char inputCurr = input.get(i);
             if (shiftTable.containsKey(inputCurr)) {// Is the character in the word
@@ -86,16 +85,25 @@ public class Horspools {
         return input;
     }
 
-    public void printShiftTable(HashMap<Character, Integer> st) {
-        for (Character key : st.keySet()) {
-            System.out.println(key + " " + st.get(key));
-        }
+    public void setSearchWord(String newSearch) {
+        searchWord = newSearch;
     }
 
-    public void testFile() {
+    public void printShiftTable(HashMap<Character, Integer> st) {
+        for (Character key : st.keySet()) {
+            System.out.print(key + " ");
+        }
+        System.out.println();
+        for (Character key : st.keySet()) {
+            System.out.print(shiftTable.get(key) + " ");
+        }
+        System.out.println();
+
+    }
+
+    public void printTestFile() {
         for (int i = 0; i < input.size(); i++)
             System.out.print(input.get(i));
-        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -105,11 +113,11 @@ public class Horspools {
 
         // System.out.println(t1.findString());
 
-        Horspools t2 = new Horspools("BARBER", "horspool.txt");
+        Horspools t2 = new Horspools("barber", "horspool.txt");
 
         System.out.println();
-        t2.printShiftTable(t2.getShiftTable());
-        t2.testFile();
+        // t2.printShiftTable(t2.getShiftTable());
+        // t2.testFile();
         System.out.println(t2.findString());
 
     }
