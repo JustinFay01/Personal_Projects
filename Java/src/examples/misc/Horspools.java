@@ -12,13 +12,17 @@ public class Horspools {
     private String searchWord;
     private ArrayList<Character> input;
 
-    public Horspools(String searchWord, String file) {
+    public Horspools(String searchWord, String file, boolean f) {
         this.searchWord = searchWord.toLowerCase();
         this.file = file;
         shiftTable = new HashMap<>();
         input = new ArrayList<>();
         buildTable();
-        loadFile();
+        if(f)
+            loadFile();
+        else
+            loadString();
+        
     }
 
     public void buildTable() {
@@ -36,6 +40,8 @@ public class Horspools {
 
     public boolean findString() {
         int tableIndex = searchWord.length() - 1;
+        System.out.println(file);
+        printWSandSearchWord(0);
         for (int i = searchWord.length() - 1; i < input.size(); i++) {
             char inputCurr = input.get(i);
             if (shiftTable.containsKey(inputCurr)) {// Is the character in the word
@@ -43,19 +49,32 @@ public class Horspools {
                 if (searchWord.charAt(tableIndex) == inputCurr) {// it does? keep comparing until it dosent
                     int tmp = i;// save location
                     while (tableIndex >= 0 && searchWord.charAt(tableIndex) == input.get(i)) {
+                        //System.out.println("Comparing " + searchWord.charAt(tableIndex) + " to " + input.get(i));
+                        //printWSandSearchWord(i);
                         i--;
                         tableIndex--;
+                        //System.out.println(tableIndex);
                     }
-                    if (tableIndex <= 0)
+                    if (tableIndex < 0)
                         return true;// Found it!
-                    i = ++tmp;
+                   i = ++tmp;
+                   printWSandSearchWord(i);
                 }
             } else {// Nope shift the entire lenth
                 i = determineShift(i, inputCurr);
             }
+            printWSandSearchWord(i);
             tableIndex = searchWord.length() - 1; // reset table index
         }
         return false;
+    }
+
+    public void loadString(){
+        if(!input.isEmpty())
+            input.clear();
+        for(int i = 0; i < file.length(); i++){
+            input.add(Character.toLowerCase(file.charAt(i)));
+        }
     }
 
     public void loadFile() {
@@ -74,7 +93,7 @@ public class Horspools {
     }
 
     public int determineShift(int curr, char key) {
-        return shiftTable.containsKey(key) ? curr + shiftTable.get(key) : curr + searchWord.length();
+        return shiftTable.containsKey(key) ? curr + shiftTable.get(key) : curr + searchWord.length()-1;
     }
 
     public HashMap<Character, Integer> getShiftTable() {
@@ -86,38 +105,44 @@ public class Horspools {
     }
 
     public void setSearchWord(String newSearch) {
-        searchWord = newSearch;
+        searchWord = newSearch;  
+        shiftTable.clear();
+        buildTable(); 
     }
 
-    public void printShiftTable(HashMap<Character, Integer> st) {
-        for (Character key : st.keySet()) {
+    public String getSearchWord(){
+        return searchWord;
+    }
+
+    public void printWSandSearchWord(int n){
+        for(int i = 0; i < n; i++){
+            System.out.print(" ");
+        }
+        System.out.print(searchWord+"\n");
+    }
+
+    public void printShiftTable() {
+        for (Character key : shiftTable.keySet()) {
             System.out.print(key + " ");
         }
         System.out.println();
-        for (Character key : st.keySet()) {
+        for (Character key : shiftTable.keySet()) {
             System.out.print(shiftTable.get(key) + " ");
         }
         System.out.println();
-
     }
 
-    public void printTestFile() {
+    public void printFile() {
         for (int i = 0; i < input.size(); i++)
             System.out.print(input.get(i));
     }
 
     public static void main(String[] args) {
         // Test shift table
-        // Horspools t1 = new Horspools("abcd", "horspool.txt");
-        // System.out.println();
+        Horspools t2 = new Horspools("barber", "jim_saw_me_in_the_barber_shop", false);
 
-        // System.out.println(t1.findString());
-
-        Horspools t2 = new Horspools("barber", "horspool.txt");
-
-        System.out.println();
-        // t2.printShiftTable(t2.getShiftTable());
-        // t2.testFile();
+        //t2.setSearchWord("me");
+        t2.printShiftTable();
         System.out.println(t2.findString());
 
     }
