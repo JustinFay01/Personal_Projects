@@ -143,7 +143,6 @@ public class Horspools {
 
         //t2.setSearchWord("me");
         t2.printShiftTable();
-        Horspools t2 = new Horspools("me", "jim_saw_me_in_the_barber_shop", false);
 
         //t2.setSearchWord("me");
         t2.printShiftTable();
