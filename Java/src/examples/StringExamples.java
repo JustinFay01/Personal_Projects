@@ -3,6 +3,32 @@ package examples;
 import java.util.*;
 
 public class StringExamples {
+
+	/*
+	 * Given two binary strings a and b, return their sum as a binary string.
+	 */
+	public String addBinary(String a, String b) {
+		int n = a.length(), m = b.length();
+		if(n < m) return addBinary(b, a);
+		int L = Math.max(n, m);
+
+		int carry = 0, j = m -1;
+		StringBuilder r = new StringBuilder();
+		for(int i = L -1 ; i >= 0; i--){
+			if(a.charAt(i) == '1') 
+				carry++;
+			if(j > -1 && b.charAt(j--) == '1')
+				carry++;
+
+			if(carry % 2 == 0) r.append("0");
+			else r.append("1");
+
+			carry /= 2;
+		}
+		if (carry == 1) r.append('1');
+   		r.reverse();
+		return r.toString();
+	}
 	
 	/*
 	 * Given a string s which consists of lowercase or uppercase letters, return the
