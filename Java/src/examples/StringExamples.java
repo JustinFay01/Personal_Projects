@@ -6,6 +6,8 @@ public class StringExamples {
 
 	/*
 	 * Given two binary strings a and b, return their sum as a binary string.
+	 * Time O(max(n,m))
+	 * Space O(max(n,m))
 	 */
 	public String addBinary(String a, String b) {
 		int n = a.length(), m = b.length();
