@@ -8,11 +8,27 @@ import java.util.Set;
 public class IntExamples {
 
 	public static void main(String[] args) {
-
+		System.out.println(bitwiseAddandSub(2, 12, true));
 	}
-	
-	
-	/*	
+
+
+	/*
+	 * Add/Subtract two numbers without any arithemtic operators
+	 */
+	public static int bitwiseAddandSub(int a, int b, boolean sub){
+		if(sub) b = ~b;
+		int carry, ans;
+		carry = ans = 0;
+		while(b != 0){
+			ans = (a ^ b);
+			carry = (a & b) << 1;
+			a = ans;
+			b = carry;
+		}
+		return ans = sub ? ++ans : ans;
+	}
+
+	/*
 	 * You are given a 0-indexed integer array tasks, where tasks[i] represents the
 	 * difficulty level of a task. In each round, you can complete either 2 or 3
 	 * tasks of the same difficulty level.
@@ -88,7 +104,7 @@ public class IntExamples {
 	public int pivotIndex(int[] nums) {
 		int n = nums.length;
 		int left[] = new int[n];
-		
+
 		// Compute all values of left
 		for (int i = 1; i < n; i++) {
 			left[i] = nums[i - 1] + left[i - 1];
@@ -166,7 +182,7 @@ public class IntExamples {
 		return result;
 	}
 
-//Largest element in array quickly (binary search style)
+	// Largest element in array quickly (binary search style)
 	public static int largest(int s[], int l, int r) {
 		int mid = 0;
 		if (l == r)
