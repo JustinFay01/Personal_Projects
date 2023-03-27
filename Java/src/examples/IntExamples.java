@@ -11,15 +11,43 @@ public class IntExamples {
 		System.out.println(bitwiseAddandSub(2, 12, true));
 	}
 
+	/*
+	 * You are given an integer array height of length n. There are n vertical lines
+	 * drawn such that the two endpoints of the ith line are (i, 0) and (i,
+	 * height[i]).
+	 * 
+	 * Find two lines that together with the x-axis form a container, such that the
+	 * container contains the most water.
+	 * 
+	 * Return the maximum amount of water a container can store.
+	 * 
+	 * Notice that you may not slant the container.
+	 */
+	public int maxArea(int[] height) {
+		int i = 0;
+		int j = height.length - 1;
+		int maxWater = 0;
+		while (i < j) {
+			int water = Math.min(height[i], height[j]) * (j - i);
+			maxWater = Math.max(maxWater, water);
+			if (height[i] < height[j])
+				i++;
+			else
+				j--;
+		}
+		return maxWater;
+
+	}
 
 	/*
 	 * Add/Subtract two numbers without any arithemtic operators
 	 */
-	public static int bitwiseAddandSub(int a, int b, boolean sub){
-		if(sub) b = ~b;
+	public static int bitwiseAddandSub(int a, int b, boolean sub) {
+		if (sub)
+			b = ~b;
 		int carry, ans;
 		carry = ans = 0;
-		while(b != 0){
+		while (b != 0) {
 			ans = (a ^ b);
 			carry = (a & b) << 1;
 			a = ans;
