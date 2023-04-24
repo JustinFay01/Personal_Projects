@@ -1,14 +1,58 @@
 package examples;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class IntExamples {
 
 	public static void main(String[] args) {
 		System.out.println(bitwiseAddandSub(2, 12, true));
+	}
+
+	/** 
+	 * 1046. Last Stone Weight
+	 * @param stones
+	 * @return
+	 *         You are given an array of integers stones where stones[i] is the
+	 *         weight of the ith stone.
+	 * 
+	 *         We are playing a game with the stones. On each turn, we choose the
+	 *         heaviest two stones and smash them together. Suppose the heaviest two
+	 *         stones have weights x and y with x <= y. The result of this smash is:
+	 * 
+	 *         If x == y, both stones are destroyed, and
+	 *         If x != y, the stone of weight x is destroyed, and the stone of
+	 *         weight y has new weight y - x.
+	 *         At the end of the game, there is at most one stone left.
+	 * 
+	 *         Return the weight of the last remaining stone. If there are no stones
+	 *         left, return 0.
+	 */
+	public int lastStoneWeight(int[] stones) {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		// Add to array list to use remove method
+		for (int stone : stones) {
+			list.add(stone);
+		}
+		int x, y;
+		while (list.size() > 0) {
+			// Sort to get two largest stones
+			Collections.sort(list);
+			y = list.size() - 1;
+			if (y == 0)
+				break;
+			x = y - 1;
+			// if x == y both stones removed
+			if (list.get(x) == list.get(y)) {
+				list.remove(y);
+				list.remove(x);
+			} else {
+				list.set(x, list.get(y) - list.get(x));
+				list.remove(y);
+			}
+		}
+
+		return list.size() == 0 ? 0 : list.get(0);
+
 	}
 
 	/*
