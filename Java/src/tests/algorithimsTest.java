@@ -6,10 +6,10 @@ import org.junit.Test;
 
 import examples.Algorithms;
 
-class algorithimsTest {
+public class algorithimsTest {
 
 	@org.junit.Test
-	void coinRowTest() {
+	public void coinRowTest() {
 		Algorithms algo = new Algorithms();
 		
 		int[] C = new int[8];
@@ -42,11 +42,20 @@ class algorithimsTest {
 	}
 	
 	@Test
-	void itFibTest() {
+	public void itFibTest() {
 		Algorithms algo = new Algorithms();
-		System.out.println(algo.fibIT(60));
+	
+		//System.out.println(algo.fibIT(30));
 		
-		System.out.println(algo.fibITInPlace(60));
+		System.out.println(algo.fibITInPlace(50));
+	
+	}
+
+	@Test
+	public void recFibTest() {
+		Algorithms algo = new Algorithms();
+		System.out.println(algo.fib(50));
+		
 	
 	}
 		
