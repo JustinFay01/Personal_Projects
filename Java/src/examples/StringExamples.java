@@ -4,6 +4,55 @@ import java.util.*;
 
 public class StringExamples {
 
+	/**
+	 * LeetCode 1456
+	 * Given a string s and an integer k, return the maximum number of vowel letters
+	 * in any substring of s with length k.
+	 * 
+	 * Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+	 * 
+	 * @param s
+	 * @param k
+	 * @return
+	 * 
+	 *         time O(n)
+	 *         Space O(1)
+	 * 
+	 *         This example demonstrates how to use a window method instead of
+	 *         recomputing data already done. For example, the brute force method
+	 *         would be to compute every substring of length k and determine
+	 *         how many vowels there were changing max each time. A better method
+	 *         would be to first compute a window of length k, then add and subtract
+	 *         based on the previous first value of
+	 *         the window and the new value entering the windwow.
+	 */
+	public int maxVowels(String s, int k) {
+		Set<Character> vowelSet = Set.of('a', 'e', 'i', 'o', 'u');
+
+		// Initalize window
+		int vol = 0;
+		for (int i = 0; i < k; i++) {
+			if (vowelSet.contains(s.charAt(i))) {
+				vol++;
+			}
+		}
+
+		// Rest of string
+		int max = vol;
+		for (int i = k; i < s.length(); i++) {
+			// check new windwow val
+			if (vowelSet.contains(s.charAt(i))) {
+				vol++;
+			}
+			// check if old value was a vowel
+			if (vowelSet.contains(s.charAt(i - k))) {
+				vol--;
+			}
+			max = Math.max(max, vol);
+		}
+		return max;
+	}
+
 	/*
 	 * Given two binary strings a and b, return their sum as a binary string.
 	 * Time O(max(n,m))
@@ -11,27 +60,31 @@ public class StringExamples {
 	 */
 	public String addBinary(String a, String b) {
 		int n = a.length(), m = b.length();
-		if(n < m) return addBinary(b, a);
+		if (n < m)
+			return addBinary(b, a);
 		int L = Math.max(n, m);
 
-		int carry = 0, j = m -1;
+		int carry = 0, j = m - 1;
 		StringBuilder r = new StringBuilder();
-		for(int i = L -1 ; i >= 0; i--){
-			if(a.charAt(i) == '1') 
+		for (int i = L - 1; i >= 0; i--) {
+			if (a.charAt(i) == '1')
 				carry++;
-			if(j > -1 && b.charAt(j--) == '1')
+			if (j > -1 && b.charAt(j--) == '1')
 				carry++;
 
-			if(carry % 2 == 0) r.append("0");
-			else r.append("1");
+			if (carry % 2 == 0)
+				r.append("0");
+			else
+				r.append("1");
 
 			carry /= 2;
 		}
-		if (carry == 1) r.append('1');
-   		r.reverse();
+		if (carry == 1)
+			r.append('1');
+		r.reverse();
 		return r.toString();
 	}
-	
+
 	/*
 	 * Given a string s which consists of lowercase or uppercase letters, return the
 	 * length of the longest palindrome that can be built with those letters.
@@ -87,33 +140,33 @@ public class StringExamples {
 		for (int i = 0; i < s.length(); i++) {
 			Character var = s.charAt(i);
 			switch (var) {
-			case ('('):
-				charStack.push(var);
-				break;
-			case ('['):
-				charStack.push(var);
-				break;
-			case ('{'):
-				charStack.push(var);
-				break;
-			case (')'):
-				if (!charStack.empty() && charStack.peek() == '(')
-					charStack.pop();
-				else
-					return false;
-				break;
-			case ('}'):
-				if (!charStack.empty() && charStack.peek() == '{')
-					charStack.pop();
-				else
-					return false;
-				break;
-			case (']'):
-				if (!charStack.empty() && charStack.peek() == '[')
-					charStack.pop();
-				else
-					return false;
-				break;
+				case ('('):
+					charStack.push(var);
+					break;
+				case ('['):
+					charStack.push(var);
+					break;
+				case ('{'):
+					charStack.push(var);
+					break;
+				case (')'):
+					if (!charStack.empty() && charStack.peek() == '(')
+						charStack.pop();
+					else
+						return false;
+					break;
+				case ('}'):
+					if (!charStack.empty() && charStack.peek() == '{')
+						charStack.pop();
+					else
+						return false;
+					break;
+				case (']'):
+					if (!charStack.empty() && charStack.peek() == '[')
+						charStack.pop();
+					else
+						return false;
+					break;
 			}
 
 		}
@@ -345,27 +398,27 @@ public class StringExamples {
 		int ans = 0, num = 0;
 		for (int i = s.length() - 1; i >= 0; i--) {
 			switch (s.charAt(i)) {
-			case 'I':
-				num = 1;
-				break;
-			case 'V':
-				num = 5;
-				break;
-			case 'X':
-				num = 10;
-				break;
-			case 'L':
-				num = 50;
-				break;
-			case 'C':
-				num = 100;
-				break;
-			case 'D':
-				num = 500;
-				break;
-			case 'M':
-				num = 1000;
-				break;
+				case 'I':
+					num = 1;
+					break;
+				case 'V':
+					num = 5;
+					break;
+				case 'X':
+					num = 10;
+					break;
+				case 'L':
+					num = 50;
+					break;
+				case 'C':
+					num = 100;
+					break;
+				case 'D':
+					num = 500;
+					break;
+				case 'M':
+					num = 1000;
+					break;
 			}
 			if (4 * num < ans)
 				ans -= num;

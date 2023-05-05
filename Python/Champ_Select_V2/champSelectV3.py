@@ -46,7 +46,7 @@ def agentSelect(character):
 # Astra Breach Brim CHamber Cy Fade HArbor Jett Kayo KJ 
 # Neon omen phoneix raze reyna sage skye sova viper yoru
 
-agents = ["Astra", "Breach", "Brim", "Chamber", "Cypher", "Fade", "Harbor", "Jett", "Kayo", "KJ",
+agents = ["Astra", "Breach", "Brim", "Chamber", "Cypher", "Gecko", "Fade", "Harbor", "Jett", "Kayo", "KJ",
              "Neon", "Omen", "Phoneix", "Raze", "Reyna", "Sage", "Skye", "Sova", "Viper", "Yoru" ]        
 
 while True: 
